@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden min-h-screen w-full flex flex-col bg-mist-200 text-gray-900 dark:bg-[#111111] dark:text-white transition-colors duration-300"
+    class="overflow-hidden min-h-screen w-full flex flex-col bg-m-neutral-200 text-gray-900 dark:bg-[#111111] dark:text-white transition-colors duration-300"
   >
     <header class="shrink-0">
       <AppHeader />

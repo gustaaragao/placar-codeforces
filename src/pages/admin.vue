@@ -3,17 +3,13 @@
   <div class="w-full max-w-6xl mx-auto px-3 py-2 flex flex-col gap-y-6 font-sans">
     <!-- Cabeçalho do Dashboard Admin -->
     <div
-      class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-[#181818] p-6 rounded-xl border border-gray-200 dark:border-zinc-800/80 shadow-sm transition-colors duration-300"
+      class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-[#181818] px-6 py-4 rounded-xl border border-gray-200 dark:border-zinc-800/80 shadow-sm transition-colors duration-300"
     >
       <div>
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-x-3">
           <Balloon class="size-7 text-m-primary-600 dark:text-m-primary-400 animate-pulse" />
           Controle de Entrega de Balões
         </h1>
-        <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-          Gerencie e marque os balões físicos entregues às competidoras da sede local conforme as
-          submissões são aceitas.
-        </p>
       </div>
 
       <div class="flex flex-wrap items-center gap-3">
