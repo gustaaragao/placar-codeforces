@@ -6,7 +6,7 @@
         @update:model-value="(value) => (filtroPlacar = value)"
       />
     </div>
-    <PlacarTabela />
+    <PlacarTabela :filtro="filtroPlacar" />
   </div>
 </template>
 
@@ -15,5 +15,5 @@ import PlacarTabela from '@/components/PlacarTabela.vue'
 import ToggleButton from '@/components/ToggleButton.vue'
 import { ref } from 'vue'
 
-const filtroPlacar = ref('sede')
+const filtroPlacar = ref('geral')
 </script>

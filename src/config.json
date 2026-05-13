@@ -1,0 +1,41 @@
+{
+  "baloes": {
+    "A": "#d8b4fe",
+    "B": "#f472b6",
+    "C": "#c084fc",
+    "D": "#4ade80",
+    "E": "#fbbf24",
+    "F": "#60a5fa",
+    "G": "#f87171",
+    "H": "#818cf8",
+    "I": "#34d399",
+    "J": "#a78bfa",
+    "K": "#fcd34d",
+    "L": "#fca5a5",
+    "M": "#9ca3af"
+  },
+  "sedeLocal": {
+    "instituicao": "UFPE",
+    "handles": [
+      "helington",
+      "feranjos",
+      "Mulato",
+      "Paulo21",
+      "dggb",
+      "joao09",
+      "EduardoBelian",
+      "mestrebom",
+      "tomclima",
+      "marinarodass",
+      "luizeduardo",
+      "HeitorMelo",
+      "dmt2",
+      "arthurjbc",
+      "GuilhermeL",
+      "hector2006",
+      "MarcosK",
+      "ills2",
+      "Lerf"
+    ]
+  }
+}

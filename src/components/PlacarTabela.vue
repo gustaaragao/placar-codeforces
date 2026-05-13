@@ -42,24 +42,6 @@
             <!-- begin: Nome do time/participante -->
             <td class="py-4 px-6">
               <div class="flex items-center gap-4">
-                <div
-                  class="w-8 h-8 rounded border border-gray-200 dark:border-zinc-700 flex items-center justify-center bg-gray-50 dark:bg-zinc-800/50 text-gray-400 dark:text-zinc-500 shrink-0"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                    <line x1="4" x2="4" y1="22" y2="15" />
-                  </svg>
-                </div>
                 <div class="flex flex-col">
                   <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">{{
                     team.name
@@ -107,57 +89,34 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
 import BalaoIcone from '@/components/BalaoIcone.vue'
+import { parseCodeforcesData } from '@/utils/parser'
+import { fetchCodeforcesData } from '@/utils/api'
 
-const problems = [
-  { id: 'A', color: '#d8b4fe' }, // purple-300
-  { id: 'B', color: '#f472b6' }, // pink-400
-  { id: 'C', color: '#c084fc' }, // purple-400
-  { id: 'D', color: '#4ade80' }, // green-400
-  { id: 'E', color: '#fbbf24' }, // amber-400
-]
+const props = defineProps({
+  filtro: {
+    type: String,
+    default: 'geral',
+  },
+})
 
-const teams = [
-  {
-    id: 1,
-    name: 'ByteRiders',
-    institution: 'University of Tech',
-    rankColor: 'text-fuchsia-300',
-    scores: {
-      A: { solved: true, tries: 1, time: 12, first: true },
-      B: { solved: true, tries: 2, time: 34 },
-      C: { solved: true, tries: 1, time: 56 },
-      D: { solved: false, tries: -2 },
-      E: { solved: true, tries: 1, time: 120 },
-    },
-    totalSolved: 4,
-    totalPenalty: 222,
-  },
-  {
-    id: 2,
-    name: 'NullPointers',
-    institution: 'State College',
-    scores: {
-      A: { solved: true, tries: 1, time: 15 },
-      B: { solved: true, tries: 1, time: 40 },
-      C: { solved: true, tries: 3, time: 88 },
-      D: { solved: true, tries: 1, time: 140 },
-    },
-    totalSolved: 4,
-    totalPenalty: 283,
-  },
-  {
-    id: 3,
-    name: 'O(N!)',
-    institution: 'Polytechnic Inst.',
-    scores: {
-      A: { solved: true, tries: 2, time: 22 },
-      B: { solved: true, tries: 1, time: 50 },
-      C: { solved: false, tries: -4 },
-      E: { solved: true, tries: 1, time: 130 },
-    },
-    totalSolved: 3,
-    totalPenalty: 202,
-  },
-]
+const problems = ref([])
+const allTeams = ref([])
+
+const teams = computed(() => {
+  if (props.filtro === 'sede') {
+    return allTeams.value.filter((team) => team.isLocal)
+  }
+  return allTeams.value
+})
+
+onMounted(async () => {
+  const cfData = await fetchCodeforcesData()
+  if (cfData) {
+    const parsed = parseCodeforcesData(cfData)
+    problems.value = parsed.problems
+    allTeams.value = parsed.teams
+  }
+})
 </script>
