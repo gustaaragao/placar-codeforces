@@ -1,0 +1,3 @@
+- [ ] Configurar um nginx.
+- [ ] Implementar um input de seleção de linguagem: EN, PT, ES.
+- [ ] Aumentar a fonte e contrastes nos temas escuro e claro.
