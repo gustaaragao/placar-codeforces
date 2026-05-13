@@ -11,7 +11,7 @@
       v-for="option in props.options"
       :key="option.value"
       type="button"
-      class="relative z-10 flex-1 rounded-full py-1.5 px-4 text-sm font-medium transition-colors duration-300 focus:outline-none"
+      class="cursor-pointer relative z-10 flex-1 rounded-full py-1.5 px-4 text-sm font-medium transition-colors duration-300 focus:outline-none"
       :class="
         props.modelValue === option.value ? 'text-white' : 'text-[#4A4A4A] dark:text-[#98989D]'
       "

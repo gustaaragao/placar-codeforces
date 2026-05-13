@@ -5,24 +5,40 @@
         v-if="estado === 'resolvido'"
         size="32"
         :fill="cor"
-        :color="cor"
-        :style="isFirst ? `filter: drop-shadow(0 0 8px ${cor});` : ''"
+        :style="{ color: cor }"
+        class="stroke-m-neutral-800 dark:stroke-current"
       />
-      <Balloon v-else-if="estado === 'tentado'" size="32" color="#f87171" />
-      <Balloon v-else-if="estado === 'vazio'" size="32" color="#a1a1aa" />
+      <Balloon 
+        v-else-if="estado === 'tentado'" 
+        size="32" 
+        class="text-m-secondary-600 dark:text-m-secondary-400" 
+      />
+      <Balloon 
+        v-else-if="estado === 'vazio'" 
+        size="32" 
+        class="text-m-neutral-300 dark:text-m-neutral-700" 
+      />
+      
+      <Star
+        v-if="estado === 'resolvido' && isFirst"
+        size="16"
+        :fill="cor"
+        :style="{ color: cor }"
+        class="absolute -top-1.5 -right-1.5 stroke-m-neutral-800 dark:stroke-current"
+      />
     </div>
     <div
       v-if="estado !== 'vazio' && tentativas !== undefined"
-      class="text-[11px] font-mono text-zinc-400 mt-1 text-center leading-none"
+      class="text-[11px] font-mono mt-1 text-center leading-none"
     >
-      <span v-if="estado === 'resolvido'" class="text-zinc-300">{{ tentativas }}/{{ tempo }}</span>
-      <span v-else-if="estado === 'tentado'" class="text-red-400">{{ tentativas }}</span>
+      <span v-if="estado === 'resolvido'" class="text-m-neutral-800 dark:text-m-neutral-300 font-semibold dark:font-medium">{{ tentativas }}/{{ tempo }}</span>
+      <span v-else-if="estado === 'tentado'" class="text-m-secondary-600 dark:text-m-secondary-400 font-semibold dark:font-medium">{{ tentativas }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Balloon } from '@lucide/vue'
+import { Balloon, Star } from '@lucide/vue'
 
 defineProps({
   tentativas: Number,
