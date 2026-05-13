@@ -17,6 +17,13 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
+        // Nuxt auto-imports
+        useHead: 'readonly',
+        useNuxtApp: 'readonly',
+        defineNuxtConfig: 'readonly',
+        useRoute: 'readonly',
+        useRouter: 'readonly',
+        navigateTo: 'readonly',
       },
     },
   },

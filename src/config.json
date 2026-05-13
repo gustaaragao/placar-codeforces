@@ -3,6 +3,54 @@
     "A": {
       "cor": "#34d399",
       "nome": "verde"
+    },
+    "B": {
+      "cor": "#f472b6",
+      "nome": "rosa"
+    },
+    "C": {
+      "cor": "#c084fc",
+      "nome": "roxo"
+    },
+    "D": {
+      "cor": "#4ade80",
+      "nome": "verde-claro"
+    },
+    "E": {
+      "cor": "#fbbf24",
+      "nome": "amarelo"
+    },
+    "F": {
+      "cor": "#60a5fa",
+      "nome": "azul"
+    },
+    "G": {
+      "cor": "#f87171",
+      "nome": "vermelho"
+    },
+    "H": {
+      "cor": "#818cf8",
+      "nome": "azul-claro"
+    },
+    "I": {
+      "cor": "#34d399",
+      "nome": "verde"
+    },
+    "J": {
+      "cor": "#a78bfa",
+      "nome": "roxo"
+    },
+    "K": {
+      "cor": "#fcd34d",
+      "nome": "amarelo"
+    },
+    "L": {
+      "cor": "#fca5a5",
+      "nome": "vermelho-claro"
+    },
+    "M": {
+      "cor": "#9ca3af",
+      "nome": "cinza"
     }
   },
   "sedeLocal": {

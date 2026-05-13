@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex items-center justify-between px-8 py-6 border-b border-m-neutral-200/60 dark:border-m-neutral-800/80 bg-m-neutral-50 dark:bg-m-neutral-900 rounded-t-xl transition-colors duration-300"
+    class="flex items-center justify-between px-8 py-6 border-b border-m-neutral-200/60 dark:border-m-neutral-800/80 bg-m-neutral-50 dark:bg-m-neutral-900 rounded-t-xl transition-colors duration-300 shadow-md"
   >
     <div class="flex gap-x-4 items-center">
       <img
@@ -14,7 +14,9 @@
     </div>
 
     <div class="flex items-center gap-4 shrink-0">
-      <nav class="flex items-center gap-1 bg-m-neutral-200/60 dark:bg-m-neutral-800/60 p-1 rounded-lg border border-m-neutral-300/40 dark:border-m-neutral-700/40">
+      <nav
+        class="flex items-center gap-1 bg-m-neutral-200/60 dark:bg-m-neutral-800/60 p-1 rounded-lg border border-m-neutral-300/40 dark:border-m-neutral-700/40"
+      >
         <NuxtLink
           to="/"
           class="px-3 py-1 text-sm font-medium rounded-md transition-all duration-200"
