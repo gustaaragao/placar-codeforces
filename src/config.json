@@ -57,8 +57,10 @@
     "instituicao": "UFS",
     "participantes": {
       "greedy-ufs": "Gustavo Aragão",
-      "dimitt1": "Dimitri Martins"
+      "dimitt1": "Dimitri Martins",
+      "feranjos": "Fernando Anjos",
+      "helington": "Helington"
     },
-    "handles": ["greedy-ufs", "dimitt1"]
+    "handles": ["greedy-ufs", "dimitt1", "feranjos", "helington"]
   }
 }

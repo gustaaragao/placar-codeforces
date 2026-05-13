@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full w-full font-sans flex flex-col">
+  <div class="h-full w-full font-sans flex flex-col overflow-hidden">
     <div
-      class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 overflow-auto shadow-xl flex-1 relative transition-colors duration-300"
+      class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 shadow-xl flex-1 relative transition-colors duration-300"
     >
       <!-- Barra de Ferramentas: Última Atualização, Reload e Simulação -->
       <div
