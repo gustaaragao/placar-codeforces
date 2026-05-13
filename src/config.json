@@ -55,12 +55,16 @@
   },
   "sedeLocal": {
     "instituicao": "UFS",
-    "participantes": {
-      "greedy-ufs": "Gustavo Aragão",
-      "dimitt1": "Dimitri Martins",
-      "feranjos": "Fernando Anjos",
-      "helington": "Helington"
+    "divisoes": {
+      "UFS": { "label": "UFS" },
+      "EM": { "label": "Ensino Médio" }
     },
-    "handles": ["greedy-ufs", "dimitt1", "feranjos", "helington"]
+    "participantes": {
+      "greedy-ufs": { "nome": "Gustavo Aragão", "divisao": "UFS" },
+      "dimitt1": { "nome": "Dimitri Martins", "divisao": "UFS" },
+      "feranjos": { "nome": "Fernando Anjos", "divisao": "EM" },
+      "helington": { "nome": "Helington", "divisao": "EM" },
+      "Mulato": { "nome": "Mulato", "divisao": "UFS" }
+    }
   }
 }

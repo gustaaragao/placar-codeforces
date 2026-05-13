@@ -166,14 +166,14 @@
               :size="40"
               :fill="item.color"
               :style="{ color: item.color }"
-              class="stroke-m-neutral-800 dark:stroke-current drop-shadow-sm transition-transform group-hover:scale-110 duration-300"
+              class="stroke-[1px] stroke-m-neutral-800 dark:stroke-white drop-shadow-sm transition-transform group-hover:scale-110 duration-300"
             />
             <Star
               v-if="item.isFirst"
               :size="16"
               :fill="item.color"
               :style="{ color: item.color }"
-              class="absolute -top-1 -right-1 stroke-m-neutral-800 dark:stroke-current animate-spin-slow"
+              class="absolute -top-1 -right-1 stroke-[1px] stroke-m-neutral-800 dark:stroke-white animate-spin-slow"
               title="First Blood (Primeiro a Resolver)"
             />
           </div>
@@ -273,7 +273,7 @@
               :size="40"
               :fill="item.color"
               :style="{ color: item.color }"
-              class="stroke-m-neutral-800 dark:stroke-current drop-shadow-xs"
+              class="stroke-[1px] stroke-m-neutral-800 dark:stroke-white drop-shadow-xs"
             />
             <div
               class="absolute inset-0 bg-white/20 dark:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[0.5px]"

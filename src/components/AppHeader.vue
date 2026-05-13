@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex items-center justify-between px-8 py-6 border-b border-m-neutral-200/60 dark:border-m-neutral-800/80 bg-m-neutral-50 dark:bg-m-neutral-900 rounded-t-xl transition-colors duration-300 shadow-md"
+    class="flex items-center justify-between px-8 py-4 border-b border-m-neutral-200/60 dark:border-m-neutral-800/80 bg-m-neutral-50 dark:bg-m-neutral-900 rounded-t-xl transition-colors duration-300 shadow-md"
   >
     <div class="flex gap-x-4 items-center">
       <img

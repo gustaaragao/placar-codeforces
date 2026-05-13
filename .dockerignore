@@ -1,0 +1,38 @@
+# Dependências instaladas localmente (serão reinstaladas no build)
+node_modules
+
+# Outputs de build anteriores
+.output
+.nuxt
+.nitro
+.cache
+dist
+
+# Arquivos de ambiente (injetados via docker-compose env_file)
+.env
+.env.*
+!.env.example
+
+# Controle de versão
+.git
+.gitignore
+
+# Agentes e docs de desenvolvimento
+.agents
+AGENTS.md
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Cache do ESLint
+.eslintcache
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode
+.idea

@@ -1,5 +1,16 @@
 import config from '../config.json'
 
+// Resolve as informações de um participante pelo handle
+const getParticipantInfo = (handle) => {
+  const partCfg = config.sedeLocal.participantes
+  if (!partCfg) return null
+  const entry = partCfg[handle]
+  if (!entry) return null
+  // Suporte ao formato novo { nome, divisao } e ao formato antigo (string)
+  if (typeof entry === 'object') return entry
+  return { nome: entry, divisao: null }
+}
+
 export function parseCodeforcesData(cfData) {
   if (!cfData || !cfData.result || !cfData.result.problems || !cfData.result.rows) {
     return { problems: [], teams: [] }
@@ -35,35 +46,27 @@ export function parseCodeforcesData(cfData) {
 
   // 3. Montar a lista de times (rows)
   const teams = cfData.result.rows.map((row) => {
-    const getRealName = (handle) => {
-      const partCfg = config.sedeLocal.participantes
-      if (partCfg) {
-        if (typeof partCfg === 'object' && !Array.isArray(partCfg)) {
-          return partCfg[handle] || null
-        } else if (Array.isArray(partCfg)) {
-          const f = partCfg.find((p) => p && p.handle === handle)
-          return f ? f.nome : null
-        }
-      }
-      return null
-    }
+    // Verificar se algum membro está na lista de participantes locais
+    const localMembers = row.party.members.map((m) => ({
+      handle: m.handle,
+      info: getParticipantInfo(m.handle),
+    }))
+    const isLocal = localMembers.some((m) => m.info !== null)
 
-    // Verificar se algum membro está na lista de handles locais ou em participantes
-    const isLocal = row.party.members.some((m) => {
-      const inH = config.sedeLocal.handles && config.sedeLocal.handles.includes(m.handle)
-      return inH || getRealName(m.handle) !== null
-    })
+    // Determinar a divisão predominante do time (a do primeiro membro local encontrado)
+    const localMember = localMembers.find((m) => m.info !== null)
+    const divisao = localMember?.info?.divisao || null
 
     // Mapear os nomes customizados dos membros
     const memberDisplayNames = row.party.members.map((m) => {
-      const rn = getRealName(m.handle)
-      return rn ? `${rn} (${m.handle})` : m.handle
+      const info = getParticipantInfo(m.handle)
+      return info ? `${info.nome} (${m.handle})` : m.handle
     })
 
     // Obter o nome do time incorporando o nome real da participante
     const baseMembersStr = memberDisplayNames.join(', ')
     const name = row.party.teamName
-      ? isLocal && row.party.members.some((m) => getRealName(m.handle))
+      ? isLocal && localMembers.some((m) => m.info)
         ? `${row.party.teamName} - ${baseMembersStr}`
         : row.party.teamName
       : baseMembersStr
@@ -97,6 +100,7 @@ export function parseCodeforcesData(cfData) {
       name,
       institution,
       isLocal,
+      divisao,
       scores,
       totalSolved: row.points,
       totalPenalty: row.penalty,

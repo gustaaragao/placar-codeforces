@@ -20,7 +20,7 @@ import AppFooter from '@/components/AppFooter.vue'
 import faviconUrl from '@/assets/logo-mfp.png'
 
 useHead({
-  title: 'Placar Codeforces - Maratona Feminina de Programação',
+  title: 'Placar - MFP',
   link: [{ rel: 'icon', type: 'image/png', href: faviconUrl }],
 })
 </script>

@@ -94,13 +94,26 @@
             <!-- begin: Nome do time/participante -->
             <td class="py-4 px-6">
               <div class="flex items-center gap-4">
-                <div class="flex flex-col">
+                <div class="flex flex-col gap-y-1">
                   <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">{{
                     team.name
                   }}</span>
                   <span class="text-xs text-gray-500 dark:text-zinc-400" v-if="team.institution">{{
                     team.institution
                   }}</span>
+                  <!-- Medalhas por categoria (visíveis no filtro de Sede) -->
+                  <div v-if="filtro === 'sede' && medalsByTeam[team.id]?.length" class="flex flex-wrap gap-1 mt-0.5">
+                    <span
+                      v-for="medal in medalsByTeam[team.id]"
+                      :key="medal.categoria"
+                      class="inline-flex items-center gap-x-1 text-[11px] font-semibold px-1.5 py-0.5 rounded-md border"
+                      :class="medal.classes"
+                      :title="`${medal.categoriaLabel}: ${medal.posicao}º lugar`"
+                    >
+                      <span>{{ medal.emoji }}</span>
+                      <span>{{ medal.categoriaLabel }}</span>
+                    </span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -151,6 +164,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BalaoIcone from '@/components/BalaoIcone.vue'
 import { parseCodeforcesData } from '@/utils/parser'
 import { fetchCodeforcesData } from '@/utils/api'
+import sedeConfig from '@/config.json'
 
 const props = defineProps({
   filtro: {
@@ -176,6 +190,63 @@ const teams = computed(() => {
     return allTeams.value.filter((team) => team.isLocal)
   }
   return allTeams.value
+})
+
+// Emojis e estilos das medalhas por posição
+const MEDAL_STYLES = [
+  {
+    emoji: '🥇',
+    classes:
+      'bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/60 dark:text-amber-400',
+  },
+  {
+    emoji: '🥈',
+    classes:
+      'bg-gray-100 border-gray-300 text-gray-600 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-300',
+  },
+  {
+    emoji: '🥉',
+    classes:
+      'bg-orange-50 border-orange-200 text-orange-700 dark:bg-orange-950/40 dark:border-orange-800/60 dark:text-orange-400',
+  },
+]
+
+// Computa as medalhas ganhas por cada time considerando GERAL, UFS e EM
+const medalsByTeam = computed(() => {
+  const localTeams = allTeams.value.filter((t) => t.isLocal)
+  if (!localTeams.length) return {}
+
+  const result = {}
+
+  // Função auxiliar: dado um subconjunto de times, registra medalhas para os top-3
+  const assignMedals = (subset, categoria, categoriaLabel) => {
+    // Já estão ordenados pela API: mais resolvidos primeiro, depois menor penalidade
+    subset.slice(0, 3).forEach((team, idx) => {
+      if (!result[team.id]) result[team.id] = []
+      const style = MEDAL_STYLES[idx]
+      result[team.id].push({
+        categoria,
+        categoriaLabel,
+        posicao: idx + 1,
+        emoji: style.emoji,
+        classes: style.classes,
+      })
+    })
+  }
+
+  // 1. GERAL: top-3 entre todos os times locais
+  assignMedals(localTeams, 'GERAL', 'Geral')
+
+  // 2. Por cada divisão configurada
+  const divisoes = sedeConfig.sedeLocal.divisoes || {}
+  Object.entries(divisoes).forEach(([divKey, divInfo]) => {
+    const divTeams = localTeams.filter((t) => t.divisao === divKey)
+    if (divTeams.length) {
+      assignMedals(divTeams, divKey, divInfo.label || divKey)
+    }
+  })
+
+  return result
 })
 
 let intervalId = null
