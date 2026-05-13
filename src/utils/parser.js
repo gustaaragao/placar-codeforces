@@ -8,14 +8,14 @@ export function parseCodeforcesData(cfData) {
   // 1. Extrair os problemas usando a configuração de balões
   const problems = cfData.result.problems.map((p) => {
     const balaoCfg = config.baloes[p.index]
-    const color = balaoCfg && typeof balaoCfg === 'object' ? balaoCfg.cor : (balaoCfg || '#cbd5e1')
+    const color = balaoCfg && typeof balaoCfg === 'object' ? balaoCfg.cor : balaoCfg || '#cbd5e1'
     const colorName = balaoCfg && typeof balaoCfg === 'object' ? balaoCfg.nome : ''
 
     return {
       id: p.index,
       name: p.name,
       color,
-      colorName
+      colorName,
     }
   })
 
@@ -41,7 +41,7 @@ export function parseCodeforcesData(cfData) {
         if (typeof partCfg === 'object' && !Array.isArray(partCfg)) {
           return partCfg[handle] || null
         } else if (Array.isArray(partCfg)) {
-          const f = partCfg.find(p => p && p.handle === handle)
+          const f = partCfg.find((p) => p && p.handle === handle)
           return f ? f.nome : null
         }
       }
@@ -49,21 +49,23 @@ export function parseCodeforcesData(cfData) {
     }
 
     // Verificar se algum membro está na lista de handles locais ou em participantes
-    const isLocal = row.party.members.some(m => {
+    const isLocal = row.party.members.some((m) => {
       const inH = config.sedeLocal.handles && config.sedeLocal.handles.includes(m.handle)
       return inH || getRealName(m.handle) !== null
     })
 
     // Mapear os nomes customizados dos membros
-    const memberDisplayNames = row.party.members.map(m => {
+    const memberDisplayNames = row.party.members.map((m) => {
       const rn = getRealName(m.handle)
       return rn ? `${rn} (${m.handle})` : m.handle
     })
 
     // Obter o nome do time incorporando o nome real da participante
     const baseMembersStr = memberDisplayNames.join(', ')
-    const name = row.party.teamName 
-      ? (isLocal && row.party.members.some(m => getRealName(m.handle)) ? `${row.party.teamName} - ${baseMembersStr}` : row.party.teamName)
+    const name = row.party.teamName
+      ? isLocal && row.party.members.some((m) => getRealName(m.handle))
+        ? `${row.party.teamName} - ${baseMembersStr}`
+        : row.party.teamName
       : baseMembersStr
 
     const institution = isLocal ? config.sedeLocal.instituicao : ''
@@ -71,20 +73,20 @@ export function parseCodeforcesData(cfData) {
     const scores = {}
     row.problemResults.forEach((res, idx) => {
       const pId = problems[idx].id
-      
+
       if (res.points > 0) {
         // Resolvido
         scores[pId] = {
           solved: true,
           tries: res.rejectedAttemptCount + 1,
           time: Math.floor(res.bestSubmissionTimeSeconds / 60), // em minutos
-          first: res.bestSubmissionTimeSeconds === firstBloodByProblem[idx]
+          first: res.bestSubmissionTimeSeconds === firstBloodByProblem[idx],
         }
       } else if (res.rejectedAttemptCount > 0) {
         // Tentado, mas não resolvido
         scores[pId] = {
           solved: false,
-          tries: -res.rejectedAttemptCount
+          tries: -res.rejectedAttemptCount,
         }
       }
     })
@@ -97,7 +99,7 @@ export function parseCodeforcesData(cfData) {
       isLocal,
       scores,
       totalSolved: row.points,
-      totalPenalty: row.penalty
+      totalPenalty: row.penalty,
     }
   })
 

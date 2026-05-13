@@ -21,8 +21,6 @@ import faviconUrl from '@/assets/logo-mfp.png'
 
 useHead({
   title: 'Placar Codeforces - Maratona Feminina de Programação',
-  link: [
-    { rel: 'icon', type: 'image/png', href: faviconUrl }
-  ]
+  link: [{ rel: 'icon', type: 'image/png', href: faviconUrl }],
 })
 </script>

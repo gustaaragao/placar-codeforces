@@ -2,14 +2,17 @@
 <template>
   <div class="w-full max-w-6xl mx-auto px-3 py-2 flex flex-col gap-y-6 font-sans">
     <!-- Cabeçalho do Dashboard Admin -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-[#181818] p-6 rounded-xl border border-gray-200 dark:border-zinc-800/80 shadow-sm transition-colors duration-300">
+    <div
+      class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-[#181818] p-6 rounded-xl border border-gray-200 dark:border-zinc-800/80 shadow-sm transition-colors duration-300"
+    >
       <div>
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-x-3">
           <Balloon class="size-7 text-m-primary-600 dark:text-m-primary-400 animate-pulse" />
           Controle de Entrega de Balões
         </h1>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-          Gerencie e marque os balões físicos entregues às competidoras da sede local conforme as submissões são aceitas.
+          Gerencie e marque os balões físicos entregues às competidoras da sede local conforme as
+          submissões são aceitas.
         </p>
       </div>
 
@@ -39,16 +42,26 @@
     <!-- Barra de Filtros e Abas -->
     <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
       <!-- Controle de Abas (Segmented Control) -->
-      <div class="inline-flex p-1 rounded-lg bg-gray-100 dark:bg-[#1f1f1f] border border-gray-200 dark:border-zinc-800 self-start md:self-auto transition-colors duration-300">
+      <div
+        class="inline-flex p-1 rounded-lg bg-gray-100 dark:bg-[#1f1f1f] border border-gray-200 dark:border-zinc-800 self-start md:self-auto transition-colors duration-300"
+      >
         <button
           @click="activeTab = 'pendentes'"
           class="cursor-pointer relative px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-x-2"
-          :class="activeTab === 'pendentes' ? 'bg-white dark:bg-zinc-800 text-m-primary-600 dark:text-m-primary-400 shadow-xs font-semibold' : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'"
+          :class="
+            activeTab === 'pendentes'
+              ? 'bg-white dark:bg-zinc-800 text-m-primary-600 dark:text-m-primary-400 shadow-xs font-semibold'
+              : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'
+          "
         >
           <span>Pendentes</span>
           <span
             class="px-2 py-0.5 text-xs rounded-full font-mono font-bold transition-all"
-            :class="activeTab === 'pendentes' ? 'bg-m-primary-100 text-m-primary-800 dark:bg-m-primary-950 dark:text-m-primary-300' : 'bg-gray-200 text-gray-700 dark:bg-zinc-700 dark:text-zinc-300'"
+            :class="
+              activeTab === 'pendentes'
+                ? 'bg-m-primary-100 text-m-primary-800 dark:bg-m-primary-950 dark:text-m-primary-300'
+                : 'bg-gray-200 text-gray-700 dark:bg-zinc-700 dark:text-zinc-300'
+            "
           >
             {{ pendingBalloons.length }}
           </span>
@@ -57,12 +70,20 @@
         <button
           @click="activeTab = 'entregues'"
           class="cursor-pointer relative px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-x-2"
-          :class="activeTab === 'entregues' ? 'bg-white dark:bg-zinc-800 text-m-primary-600 dark:text-m-primary-400 shadow-xs font-semibold' : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'"
+          :class="
+            activeTab === 'entregues'
+              ? 'bg-white dark:bg-zinc-800 text-m-primary-600 dark:text-m-primary-400 shadow-xs font-semibold'
+              : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'
+          "
         >
           <span>Entregues</span>
           <span
             class="px-2 py-0.5 text-xs rounded-full font-mono font-bold transition-all"
-            :class="activeTab === 'entregues' ? 'bg-m-primary-100 text-m-primary-800 dark:bg-m-primary-950 dark:text-m-primary-300' : 'bg-gray-200 text-gray-700 dark:bg-zinc-700 dark:text-zinc-300'"
+            :class="
+              activeTab === 'entregues'
+                ? 'bg-m-primary-100 text-m-primary-800 dark:bg-m-primary-950 dark:text-m-primary-300'
+                : 'bg-gray-200 text-gray-700 dark:bg-zinc-700 dark:text-zinc-300'
+            "
           >
             {{ deliveredBalloons.length }}
           </span>
@@ -71,7 +92,9 @@
 
       <!-- Campo de Busca -->
       <div class="relative w-full md:w-80">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-zinc-500">
+        <span
+          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-zinc-500"
+        >
           <Search class="size-4" />
         </span>
         <input
@@ -85,7 +108,9 @@
           @click="searchQuery = ''"
           class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:hover:text-zinc-300"
         >
-          <span class="text-xs font-bold bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded">Esc</span>
+          <span class="text-xs font-bold bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded"
+            >Esc</span
+          >
         </button>
       </div>
     </div>
@@ -97,18 +122,32 @@
 
     <!-- Área de Conteúdo: Balões Pendentes -->
     <div v-if="activeTab === 'pendentes'" class="flex flex-col gap-y-3">
-      <div v-if="loading && allBalloons.length === 0" class="py-16 text-center flex flex-col items-center justify-center gap-3">
+      <div
+        v-if="loading && allBalloons.length === 0"
+        class="py-16 text-center flex flex-col items-center justify-center gap-3"
+      >
         <RefreshCw class="size-8 animate-spin text-m-primary-500" />
-        <span class="text-sm text-gray-500 dark:text-zinc-400">Carregando submissões do contest...</span>
+        <span class="text-sm text-gray-500 dark:text-zinc-400"
+          >Carregando submissões do contest...</span
+        >
       </div>
 
-      <div v-else-if="pendingBalloons.length === 0" class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 p-12 text-center flex flex-col items-center justify-center transition-colors duration-300">
-        <div class="p-4 rounded-full bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400 mb-3">
+      <div
+        v-else-if="pendingBalloons.length === 0"
+        class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 p-12 text-center flex flex-col items-center justify-center transition-colors duration-300"
+      >
+        <div
+          class="p-4 rounded-full bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400 mb-3"
+        >
           <Check class="size-8" />
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white">Nenhum balão pendente!</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
-          {{ searchQuery ? 'Nenhum resultado encontrado para a busca atual.' : 'Todos os balões das submissões aceitas já foram marcados como entregues.' }}
+          {{
+            searchQuery
+              ? 'Nenhum resultado encontrado para a busca atual.'
+              : 'Todos os balões das submissões aceitas já foram marcados como entregues.'
+          }}
         </p>
       </div>
 
@@ -120,7 +159,9 @@
           class="group bg-white dark:bg-[#181818] hover:bg-gray-50/50 dark:hover:bg-[#202020] border border-gray-200 dark:border-zinc-800/80 rounded-xl p-4 flex items-center justify-between gap-4 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
         >
           <!-- Seção Esquerda: Ícone do Balão -->
-          <div class="relative shrink-0 flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-800/50 transition-colors">
+          <div
+            class="relative shrink-0 flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-800/50 transition-colors"
+          >
             <Balloon
               :size="40"
               :fill="item.color"
@@ -140,11 +181,20 @@
           <!-- Seção Central: Informações -->
           <div class="flex-1 min-w-0 flex flex-col justify-center">
             <div class="flex flex-wrap items-center gap-1.5">
-              <span class="text-xs font-bold tracking-wide uppercase px-2 py-0.5 rounded" :style="{ backgroundColor: `${item.color}20`, color: item.color }">
+              <span
+                class="text-xs font-bold tracking-wide uppercase px-2 py-0.5 rounded"
+                :style="{ backgroundColor: `${item.color}20`, color: item.color }"
+              >
                 Problema {{ item.problemId }}
               </span>
-              <span v-if="item.colorName" class="text-xs font-medium px-2 py-0.5 rounded border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-400 flex items-center gap-x-1">
-                <span class="size-2 rounded-full shrink-0" :style="{ backgroundColor: item.color }"></span>
+              <span
+                v-if="item.colorName"
+                class="text-xs font-medium px-2 py-0.5 rounded border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-400 flex items-center gap-x-1"
+              >
+                <span
+                  class="size-2 rounded-full shrink-0"
+                  :style="{ backgroundColor: item.color }"
+                ></span>
                 {{ item.colorName }}
               </span>
               <span class="text-xs text-gray-500 dark:text-zinc-500 font-mono ml-auto">
@@ -152,12 +202,18 @@
               </span>
             </div>
 
-            <span class="font-bold text-gray-900 dark:text-zinc-100 text-base truncate tracking-tight mt-1" :title="item.teamName">
+            <span
+              class="font-bold text-gray-900 dark:text-zinc-100 text-base truncate tracking-tight mt-1"
+              :title="item.teamName"
+            >
               {{ item.teamName }}
             </span>
 
             <div class="flex items-center gap-x-2 mt-0.5">
-              <span v-if="item.institution" class="text-xs text-gray-500 dark:text-zinc-400 truncate max-w-[120px]">
+              <span
+                v-if="item.institution"
+                class="text-xs text-gray-500 dark:text-zinc-400 truncate max-w-[120px]"
+              >
                 {{ item.institution }}
               </span>
               <span v-if="item.institution" class="text-gray-300 dark:text-zinc-700">•</span>
@@ -181,13 +237,24 @@
 
     <!-- Área de Conteúdo: Balões Entregues -->
     <div v-if="activeTab === 'entregues'" class="flex flex-col gap-y-3">
-      <div v-if="deliveredBalloons.length === 0" class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 p-12 text-center flex flex-col items-center justify-center transition-colors duration-300">
-        <div class="p-4 rounded-full bg-gray-50 dark:bg-zinc-800/50 text-gray-400 dark:text-zinc-600 mb-3">
+      <div
+        v-if="deliveredBalloons.length === 0"
+        class="bg-white dark:bg-[#181818] rounded-xl border border-gray-200 dark:border-zinc-800/80 p-12 text-center flex flex-col items-center justify-center transition-colors duration-300"
+      >
+        <div
+          class="p-4 rounded-full bg-gray-50 dark:bg-zinc-800/50 text-gray-400 dark:text-zinc-600 mb-3"
+        >
           <Balloon class="size-8 opacity-50" />
         </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Nenhum balão entregue registrado</h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          Nenhum balão entregue registrado
+        </h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
-          {{ searchQuery ? 'Nenhum resultado encontrado na lista de entregues.' : 'Os balões marcados como entregues aparecerão aqui para registro e possibilidade de desfazer a ação.' }}
+          {{
+            searchQuery
+              ? 'Nenhum resultado encontrado na lista de entregues.'
+              : 'Os balões marcados como entregues aparecerão aqui para registro e possibilidade de desfazer a ação.'
+          }}
         </p>
       </div>
 
@@ -199,14 +266,18 @@
           class="group bg-white/60 dark:bg-[#181818]/60 hover:bg-white dark:hover:bg-[#181818] border border-gray-200/80 dark:border-zinc-800/60 rounded-xl p-4 flex items-center justify-between gap-4 transition-all duration-300 opacity-80 hover:opacity-100"
         >
           <!-- Seção Esquerda: Ícone do Balão (com overlay de entregue) -->
-          <div class="relative shrink-0 flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-800/30">
+          <div
+            class="relative shrink-0 flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-800/30"
+          >
             <Balloon
               :size="40"
               :fill="item.color"
               :style="{ color: item.color }"
               class="stroke-m-neutral-800 dark:stroke-current drop-shadow-xs"
             />
-            <div class="absolute inset-0 bg-white/20 dark:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[0.5px]">
+            <div
+              class="absolute inset-0 bg-white/20 dark:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[0.5px]"
+            >
               <Check class="size-5 text-green-600 dark:text-green-400 stroke-[3]" />
             </div>
           </div>
@@ -214,11 +285,20 @@
           <!-- Seção Central: Informações -->
           <div class="flex-1 min-w-0 flex flex-col justify-center">
             <div class="flex flex-wrap items-center gap-1.5">
-              <span class="text-xs font-bold tracking-wide uppercase px-2 py-0.5 rounded line-through text-gray-400 dark:text-zinc-500" :style="{ backgroundColor: `${item.color}10` }">
+              <span
+                class="text-xs font-bold tracking-wide uppercase px-2 py-0.5 rounded line-through text-gray-400 dark:text-zinc-500"
+                :style="{ backgroundColor: `${item.color}10` }"
+              >
                 Problema {{ item.problemId }}
               </span>
-              <span v-if="item.colorName" class="text-xs font-medium px-2 py-0.5 rounded border border-gray-200/60 dark:border-zinc-800 text-gray-400 dark:text-zinc-500 flex items-center gap-x-1">
-                <span class="size-2 rounded-full shrink-0 opacity-60" :style="{ backgroundColor: item.color }"></span>
+              <span
+                v-if="item.colorName"
+                class="text-xs font-medium px-2 py-0.5 rounded border border-gray-200/60 dark:border-zinc-800 text-gray-400 dark:text-zinc-500 flex items-center gap-x-1"
+              >
+                <span
+                  class="size-2 rounded-full shrink-0 opacity-60"
+                  :style="{ backgroundColor: item.color }"
+                ></span>
                 {{ item.colorName }}
               </span>
               <span class="text-xs text-gray-400 dark:text-zinc-600 font-mono ml-auto">
@@ -226,7 +306,10 @@
               </span>
             </div>
 
-            <span class="font-bold text-gray-700 dark:text-zinc-300 text-base truncate tracking-tight mt-1" :title="item.teamName">
+            <span
+              class="font-bold text-gray-700 dark:text-zinc-300 text-base truncate tracking-tight mt-1"
+              :title="item.teamName"
+            >
               {{ item.teamName }}
             </span>
 
@@ -305,7 +388,11 @@ const undoDelivery = (uniqueId) => {
 }
 
 const clearDelivered = () => {
-  if (confirm('Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.')) {
+  if (
+    confirm(
+      'Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.',
+    )
+  ) {
     deliveredIds.value.clear()
     saveDeliveredToStorage()
   }
@@ -318,7 +405,7 @@ const loadData = async () => {
     const cfData = await fetchCodeforcesData()
     if (cfData) {
       const parsed = parseCodeforcesData(cfData)
-      
+
       const list = []
       if (parsed && parsed.teams) {
         parsed.teams.forEach((team) => {
@@ -357,7 +444,11 @@ const loadData = async () => {
 
       // Formatar hora de atualização
       const now = new Date()
-      lastUpdated.value = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      lastUpdated.value = now.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      })
     }
   } catch (err) {
     console.error('Erro ao carregar dados no painel admin:', err)

@@ -258,61 +258,6 @@ const loadData = async (isFirstLoad = false) => {
   }
 }
 
-// Função auxiliar para testar animações de accept e ultrapassagem após o fim do contest
-const simularAnimacao = () => {
-  if (allTeams.value.length < 2) return
-
-  // Promover o time que está em 2º lugar para o 1º lugar
-  const teamToPromote = { ...allTeams.value[1], scores: { ...allTeams.value[1].scores } }
-  const teamDemoted = { ...allTeams.value[0], scores: { ...allTeams.value[0].scores } }
-
-  // Identificar um problema não resolvido para aplicar o balão
-  let targetProblemId = problems.value[0]?.id || 'A'
-  const unsolvedProblem = problems.value.find(
-    (p) => !teamToPromote.scores[p.id] || !teamToPromote.scores[p.id].solved,
-  )
-  if (unsolvedProblem) {
-    targetProblemId = unsolvedProblem.id
-  }
-
-  // Marcar como resolvido
-  teamToPromote.scores[targetProblemId] = {
-    solved: true,
-    tries: 1,
-    time: 142,
-    first: true,
-  }
-  teamToPromote.totalSolved += 1
-
-  // Inverter posições reativas para acionar o <TransitionGroup>
-  const newTeamsArray = [...allTeams.value]
-  newTeamsArray[0] = teamToPromote
-  newTeamsArray[1] = teamDemoted
-
-  allTeams.value = newTeamsArray
-
-  // Ativar as flags de animação
-  const newBalloons = new Set(animatedBalloons.value)
-  const newScores = new Set(animatedScores.value)
-  const newRanks = new Set(animatedRanks.value)
-
-  newBalloons.add(`${teamToPromote.id}-${targetProblemId}`)
-  newScores.add(teamToPromote.id)
-  newRanks.add(teamToPromote.id)
-  newRanks.add(teamDemoted.id)
-
-  animatedBalloons.value = newBalloons
-  animatedScores.value = newScores
-  animatedRanks.value = newRanks
-
-  // Agendar remoção do destaque visual
-  setTimeout(() => {
-    animatedBalloons.value = new Set()
-    animatedScores.value = new Set()
-    animatedRanks.value = new Set()
-  }, 3500)
-}
-
 // Reload manual: executa o loadData sem ser o primeiro carregamento
 const handleReload = async () => {
   if (isLoading.value) return
