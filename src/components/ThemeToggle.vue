@@ -31,12 +31,14 @@ onMounted(() => {
 watch(
   isDark,
   (newDark) => {
-    if (newDark) {
-      document.documentElement.classList.add('dark')
-      localStorage.theme = 'dark'
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.theme = 'light'
+    if (import.meta.client) {
+      if (newDark) {
+        document.documentElement.classList.add('dark')
+        localStorage.theme = 'dark'
+      } else {
+        document.documentElement.classList.remove('dark')
+        localStorage.theme = 'light'
+      }
     }
   },
   { immediate: true },

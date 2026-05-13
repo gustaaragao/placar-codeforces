@@ -6,7 +6,7 @@
       <AppHeader />
     </header>
     <main class="flex-1 relative p-4 md:p-8">
-      <RouterView />
+      <NuxtPage />
     </main>
     <footer class="shrink-0">
       <AppFooter />
@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 </script>
