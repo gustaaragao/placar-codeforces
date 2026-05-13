@@ -1,9 +1,16 @@
 {
   "baloes": {
-    "A": "#d8b4fe"
+    "A": {
+      "cor": "#34d399",
+      "nome": "verde"
+    }
   },
   "sedeLocal": {
     "instituicao": "UFS",
-    "handles": ["greedy-ufs"]
+    "participantes": {
+      "greedy-ufs": "Gustavo Aragão",
+      "dimitt1": "Dimitri Martins"
+    },
+    "handles": ["greedy-ufs", "dimitt1"]
   }
 }

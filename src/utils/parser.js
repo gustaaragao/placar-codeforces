@@ -6,11 +6,18 @@ export function parseCodeforcesData(cfData) {
   }
 
   // 1. Extrair os problemas usando a configuração de balões
-  const problems = cfData.result.problems.map((p) => ({
-    id: p.index,
-    name: p.name,
-    color: config.baloes[p.index] || '#cbd5e1' // cor padrão se não achar
-  }))
+  const problems = cfData.result.problems.map((p) => {
+    const balaoCfg = config.baloes[p.index]
+    const color = balaoCfg && typeof balaoCfg === 'object' ? balaoCfg.cor : (balaoCfg || '#cbd5e1')
+    const colorName = balaoCfg && typeof balaoCfg === 'object' ? balaoCfg.nome : ''
+
+    return {
+      id: p.index,
+      name: p.name,
+      color,
+      colorName
+    }
+  })
 
   // 2. Encontrar o 'first to solve' (menor tempo) para cada problema
   const firstBloodByProblem = {}
@@ -28,11 +35,37 @@ export function parseCodeforcesData(cfData) {
 
   // 3. Montar a lista de times (rows)
   const teams = cfData.result.rows.map((row) => {
-    // Obter o nome do time (se existir teamName) ou o handle do usuário
-    const name = row.party.teamName || row.party.members.map(m => m.handle).join(', ')
-    
-    // Verificar se algum membro está na lista de handles locais
-    const isLocal = row.party.members.some(m => config.sedeLocal.handles.includes(m.handle))
+    const getRealName = (handle) => {
+      const partCfg = config.sedeLocal.participantes
+      if (partCfg) {
+        if (typeof partCfg === 'object' && !Array.isArray(partCfg)) {
+          return partCfg[handle] || null
+        } else if (Array.isArray(partCfg)) {
+          const f = partCfg.find(p => p && p.handle === handle)
+          return f ? f.nome : null
+        }
+      }
+      return null
+    }
+
+    // Verificar se algum membro está na lista de handles locais ou em participantes
+    const isLocal = row.party.members.some(m => {
+      const inH = config.sedeLocal.handles && config.sedeLocal.handles.includes(m.handle)
+      return inH || getRealName(m.handle) !== null
+    })
+
+    // Mapear os nomes customizados dos membros
+    const memberDisplayNames = row.party.members.map(m => {
+      const rn = getRealName(m.handle)
+      return rn ? `${rn} (${m.handle})` : m.handle
+    })
+
+    // Obter o nome do time incorporando o nome real da participante
+    const baseMembersStr = memberDisplayNames.join(', ')
+    const name = row.party.teamName 
+      ? (isLocal && row.party.members.some(m => getRealName(m.handle)) ? `${row.party.teamName} - ${baseMembersStr}` : row.party.teamName)
+      : baseMembersStr
+
     const institution = isLocal ? config.sedeLocal.instituicao : ''
 
     const scores = {}

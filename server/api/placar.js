@@ -1,3 +1,4 @@
+/* global defineEventHandler, process, createError */
 export default defineEventHandler(async (_event) => {
   const API_KEY = process.env.API_KEY || ''
   const API_SECRET = process.env.API_SECRET || ''
