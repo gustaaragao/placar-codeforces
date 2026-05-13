@@ -1,4 +1,5 @@
 {
+  "intervaloRequisicao": 60000,
   "baloes": {
     "A": {
       "cor": "#34d399",

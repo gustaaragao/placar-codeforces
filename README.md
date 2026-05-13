@@ -1,12 +1,6 @@
 <div align="center">
   <h1>🎈 Placar Codeforces</h1>
   <p>Sistema de placar em tempo real para a <strong>Maratona Feminina de Programação</strong></p>
-  <p>
-    <img src="https://img.shields.io/badge/Nuxt-3-00DC82?style=flat&logo=nuxt.js" alt="Nuxt 3"/>
-    <img src="https://img.shields.io/badge/Vue-3-42b883?style=flat&logo=vue.js" alt="Vue 3"/>
-    <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat&logo=tailwindcss" alt="Tailwind CSS v4"/>
-    <img src="https://img.shields.io/badge/Docker-ready-2496ED?style=flat&logo=docker" alt="Docker"/>
-  </p>
 </div>
 
 ---
@@ -15,23 +9,23 @@
 
 Placar customizado e em tempo real que consome a API do **Codeforces** de forma segura, oferecendo:
 
-- 🎈 **Balões coloridos** com mapeamento customizável por problema
-- ⭐ **First Blood** — destaque para quem resolve cada problema primeiro
-- 🏅 **Sistema de medalhas** por divisão (Geral, UFS, Ensino Médio)
-- 🏠 **Filtro de Sede Local** — alterne entre o placar geral e os times da sua sede
-- 🌙 **Dark Mode** com alternância fluida
-- 🔄 **Atualização automática** a cada 15 segundos
+- 🎈 **Balões coloridos**: com mapeamento customizável por problema
+- ⭐ **First Accepted**: destaque para quem resolve cada problema primeiro
+- 🏅 **Sistema de medalhas**: por divisão (Geral, Universidade X, Ensino Médio)
+- 🏠 **Filtro de Sede Local**: alterne entre o placar geral e os times da sua sede
+- 🌙 **Dark Mode**
+- 🔄 **Atualização automática** a cada 60 segundos
 
 ---
 
 ## 🛠️ Pré-requisitos
 
-| Ferramenta | Versão mínima |
-|---|---|
-| Node.js | `^20.19.0` ou `>=22.12.0` |
-| npm | `>=10` |
-| Docker *(opcional)* | qualquer versão recente |
-| Docker Compose *(opcional)* | v2+ |
+| Ferramenta                  | Versão mínima             |
+| --------------------------- | ------------------------- |
+| Node.js                     | `^20.19.0` ou `>=22.12.0` |
+| npm                         | `>=10`                    |
+| Docker _(opcional)_         | qualquer versão recente   |
+| Docker Compose _(opcional)_ | v2+                       |
 
 ---
 
@@ -58,8 +52,6 @@ GROUP_CODE=codigo_do_grupo
 CONTEST_ID=id_do_contest
 ```
 
-> **Importante:** O `.env` nunca deve ser commitado. Ele já está no `.gitignore`.
-
 ---
 
 ### 2. Configuração do Contest (`src/config.json`)
@@ -83,13 +75,11 @@ Mapeie a letra de cada problema à cor e ao nome do balão correspondente. Isso 
 }
 ```
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| `"A"` | chave | Letra do problema no contest (A, B, C…) |
-| `cor` | `string` (hex) | Cor hexadecimal do balão físico |
-| `nome` | `string` | Nome descritivo da cor (exibido no painel admin) |
-
-> **Dica:** Use o site [coolors.co](https://coolors.co) ou qualquer color picker para escolher o hex correto.
+| Campo  | Tipo           | Descrição                                        |
+| ------ | -------------- | ------------------------------------------------ |
+| `"A"`  | chave          | Letra do problema no contest (A, B, C…)          |
+| `cor`  | `string` (hex) | Cor hexadecimal do balão físico                  |
+| `nome` | `string`       | Nome descritivo da cor (exibido no painel admin) |
 
 #### 2.2 Sede Local (`sedeLocal`)
 
@@ -109,19 +99,19 @@ Configura os times e participantes da sua sede para o placar filtrado e o sistem
 }
 ```
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| `instituicao` | `string` | Nome da sede exibido abaixo do nome do time |
-| `divisoes` | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha |
-| `participantes` | `object` | Mapeamento de `handle do Codeforces` → dados da participante |
-| `participantes[handle].nome` | `string` | Nome real da competidora |
-| `participantes[handle].divisao` | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`) |
+| Campo                           | Tipo     | Descrição                                                                            |
+| ------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `instituicao`                   | `string` | Nome da sede exibido abaixo do nome do time                                          |
+| `divisoes`                      | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha |
+| `participantes`                 | `object` | Mapeamento de `handle do Codeforces` → dados da participante                         |
+| `participantes[handle].nome`    | `string` | Nome real da competidora                                                             |
+| `participantes[handle].divisao` | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                  |
 
 **Como o sistema de medalhas funciona:**
 
 O sistema calcula automaticamente 3 categorias de ranking a partir dos times detectados como locais:
 
-- 🏅 **Geral** — top 3 entre *todos* os times locais
+- 🏅 **Geral** — top 3 entre _todos_ os times locais
 - 🏅 **por Divisão** — top 3 dentro de cada divisão configurada (ex: UFS, EM)
 
 Uma mesma competidora pode receber medalhas em múltiplas categorias (ex: 🥇 Geral + 🥇 UFS). As medalhas aparecem apenas ao ativar o filtro **"Sede"** no placar.
@@ -150,13 +140,13 @@ A aplicação estará disponível em: **http://localhost:3000**
 
 ### Scripts disponíveis
 
-| Comando | Descrição |
-|---|---|
-| `npm run dev` | Inicia o servidor de desenvolvimento com HMR |
-| `npm run build` | Gera o bundle de produção em `.output/` |
-| `npm run preview` | Pré-visualiza o build de produção localmente |
-| `npm run lint` | Executa `oxlint` + `eslint` com correção automática |
-| `npm run format` | Formata o código com Prettier |
+| Comando           | Descrição                                           |
+| ----------------- | --------------------------------------------------- |
+| `npm run dev`     | Inicia o servidor de desenvolvimento com HMR        |
+| `npm run build`   | Gera o bundle de produção em `.output/`             |
+| `npm run preview` | Pré-visualiza o build de produção localmente        |
+| `npm run lint`    | Executa `oxlint` + `eslint` com correção automática |
+| `npm run format`  | Formata o código com Prettier                       |
 
 ---
 
@@ -180,30 +170,6 @@ docker compose down
 ```
 
 A aplicação ficará disponível em **http://localhost:3000**.
-
-### Opção 2 — Docker Manual
-
-```bash
-# Build da imagem
-docker build -t placar-mfp:latest .
-
-# Rodar o container passando o .env
-docker run -d \
-  --name placar-mfp \
-  --env-file .env \
-  -p 3000:3000 \
-  placar-mfp:latest
-```
-
-### Sobre a imagem Docker
-
-O `Dockerfile` usa um **build multi-stage** para garantir uma imagem final mínima (~55 MB):
-
-```
-Stage 1 (deps)     → instala node_modules
-Stage 2 (builder)  → executa npm run build → gera .output/
-Stage 3 (runner)   → copia apenas .output/ — sem código-fonte
-```
 
 ---
 

@@ -10,7 +10,6 @@
           >Greedy UFS</span
         >
       </div>
-
       <!-- Links Sociais / Referências -->
       <div class="flex items-center gap-x-4 text-sm">
         <a
@@ -28,9 +27,7 @@
           </svg>
           <span>Repositório</span>
         </a>
-
         <span class="text-gray-300 dark:text-zinc-700">|</span>
-
         <a
           href="https://instagram.com/greedy-ufs"
           target="_blank"
@@ -50,5 +47,3 @@
     </div>
   </footer>
 </template>
-
-<script setup></script>

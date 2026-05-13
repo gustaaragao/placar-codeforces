@@ -212,7 +212,7 @@
             <div class="flex items-center gap-x-2 mt-0.5">
               <span
                 v-if="item.institution"
-                class="text-xs text-gray-500 dark:text-zinc-400 truncate max-w-[120px]"
+                class="text-xs text-gray-500 dark:text-zinc-400 truncate max-w-30"
               >
                 {{ item.institution }}
               </span>
@@ -234,7 +234,6 @@
         </div>
       </div>
     </div>
-
     <!-- Área de Conteúdo: Balões Entregues -->
     <div v-if="activeTab === 'entregues'" class="flex flex-col gap-y-3">
       <div
@@ -257,7 +256,6 @@
           }}
         </p>
       </div>
-
       <!-- Lista de Grid de Balões Entregues -->
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div
@@ -278,10 +276,9 @@
             <div
               class="absolute inset-0 bg-white/20 dark:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[0.5px]"
             >
-              <Check class="size-5 text-green-600 dark:text-green-400 stroke-[3]" />
+              <Check class="size-5 text-green-600 dark:text-green-400 stroke-3" />
             </div>
           </div>
-
           <!-- Seção Central: Informações -->
           <div class="flex-1 min-w-0 flex flex-col justify-center">
             <div class="flex flex-wrap items-center gap-1.5">
