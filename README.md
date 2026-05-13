@@ -199,12 +199,6 @@ src/
 
 ---
 
-## 🔐 Segurança
-
-As credenciais da API do Codeforces (`API_KEY`, `API_SECRET`) são manipuladas **exclusivamente no servidor** (rota Nitro em `server/routes/placar.js`). O frontend nunca tem acesso a essas chaves.
-
----
-
 ## 🤝 Desenvolvido por
 
 **Greedy UFS** — [Instagram](https://instagram.com/greedy-ufs) · [GitHub](https://github.com/gustaaragao/placar-codeforces)
