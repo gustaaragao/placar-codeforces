@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-[#111111] text-white p-4 md:p-8 font-sans">
-    <div class="bg-[#181818] rounded-xl border border-zinc-800/80 overflow-x-auto shadow-xl">
+  <div class="h-full w-full p-4 md:p-8 font-sans flex flex-col">
+    <div class="bg-[#181818] rounded-xl border border-zinc-800/80 overflow-auto shadow-xl flex-1 relative">
       <table class="w-full text-left border-collapse min-w-200">
         <thead>
           <!-- begin: Cabeçalho da Tabela -->
@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import BalaoIcone from '../BalaoIcone.vue'
+import BalaoIcone from '@/components/BalaoIcone.vue'
 
 const problems = [
   { id: 'A', color: '#d8b4fe' }, // purple-300
@@ -90,6 +90,7 @@ const teams = [
   {
     id: 1,
     name: 'ByteRiders',
+    institution: 'University of Tech',
     rankColor: 'text-fuchsia-300',
     scores: {
       A: { solved: true, tries: 1, time: 12, first: true },
@@ -104,6 +105,7 @@ const teams = [
   {
     id: 2,
     name: 'NullPointers',
+    institution: 'State College',
     scores: {
       A: { solved: true, tries: 1, time: 15 },
       B: { solved: true, tries: 1, time: 40 },
@@ -116,6 +118,7 @@ const teams = [
   {
     id: 3,
     name: 'O(N!)',
+    institution: 'Polytechnic Inst.',
     scores: {
       A: { solved: true, tries: 2, time: 22 },
       B: { solved: true, tries: 1, time: 50 },
