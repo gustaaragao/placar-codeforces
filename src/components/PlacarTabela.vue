@@ -5,7 +5,7 @@
     >
       <!-- Barra de Ferramentas: Última Atualização, Reload e Simulação -->
       <div
-        class="px-4 py-2 bg-gray-50/50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-zinc-800/50 flex flex-wrap justify-between items-center gap-x-4 gap-y-2"
+        class="px-3 sm:px-4 py-2 bg-gray-50/50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-zinc-800/50 flex flex-wrap justify-between items-center gap-x-4 gap-y-2"
       >
         <!-- Status de Atualização -->
         <div class="flex items-center gap-x-2 text-xs text-gray-400 dark:text-zinc-500">
@@ -47,7 +47,9 @@
           </button>
         </div>
       </div>
-      <table class="w-full text-left border-collapse min-w-200">
+      <!-- Container com scroll horizontal para telas pequenas -->
+      <div class="overflow-x-auto w-full">
+      <table class="w-full text-left border-collapse min-w-[900px]">
         <thead>
           <!-- Cabeçalho da Tabela -->
           <tr
@@ -149,6 +151,7 @@
           </tr>
         </TransitionGroup>
       </table>
+      </div>
     </div>
   </div>
 </template>

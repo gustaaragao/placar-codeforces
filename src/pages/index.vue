@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="w-full px-3 py-1 flex flex-col gap-y-4">
+  <div class="w-full flex flex-col gap-y-3">
     <div class="w-full flex justify-end">
       <ToggleButton
         :model-value="filtroPlacar"
