@@ -4,6 +4,7 @@
     <div class="w-full flex justify-end">
       <ToggleButton
         :model-value="filtroPlacar"
+        :options="filterOptions"
         @update:model-value="(value) => (filtroPlacar = value)"
       />
     </div>
@@ -14,7 +15,14 @@
 <script setup>
 import PlacarTabela from '@/components/PlacarTabela.vue'
 import ToggleButton from '@/components/ToggleButton.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useLocale } from '@/composables/useLocale'
 
 const filtroPlacar = ref('geral')
+const { t } = useLocale()
+
+const filterOptions = computed(() => [
+  { label: t('filter.general'), value: 'geral' },
+  { label: t('filter.local'), value: 'sede' },
+])
 </script>

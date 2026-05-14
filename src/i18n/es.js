@@ -1,0 +1,48 @@
+export default {
+  nav: {
+    scoreboard: 'Marcador',
+    admin: 'Admin',
+  },
+  table: {
+    lastUpdate: 'Última actualización',
+    loading: 'Cargando...',
+    reload: 'Recargar',
+    updating: 'Actualizando…',
+    rank: '#',
+    teamName: 'Equipo / Nombre',
+    total: 'Total',
+  },
+  filter: {
+    general: 'General',
+    local: 'Sede Local',
+  },
+  admin: {
+    title: 'Control de Entrega de Globos',
+    update: 'Actualizar',
+    updating: 'Actualizando...',
+    resetHistory: 'Reiniciar Historial',
+    pending: 'Pendientes',
+    delivered: 'Entregados',
+    search: 'Buscar competidora, equipo o problema...',
+    lastCheck: 'Última verificación',
+    loadingSubmissions: 'Cargando envíos del concurso...',
+    noPendingTitle: '¡Sin globos pendientes!',
+    noPendingSearch: 'No se encontraron resultados para la búsqueda actual.',
+    noPendingAll: 'Todos los globos de los envíos aceptados ya han sido marcados como entregados.',
+    noDeliveredTitle: 'Ningún globo entregado registrado',
+    noDeliveredSearch: 'No se encontraron resultados en la lista de entregados.',
+    noDeliveredAll: 'Los globos marcados como entregados aparecerán aquí para registro y la posibilidad de deshacer la acción.',
+    markDelivered: 'Marcar como entregado',
+    undoDelivery: 'Deshacer entrega',
+    deliveredSuccess: 'Entregado con éxito',
+    tries: (n) => `${n} ${n === 1 ? 'intento' : 'intentos'}`,
+    confirmReset: '¿Estás seguro de que deseas borrar todo el historial de entrega de globos? Esta acción reiniciará la lista para todos los problemas resueltos.',
+  },
+  footer: {
+    credit: 'Aplicación desarrollada por',
+    repo: 'Repositorio',
+  },
+  head: {
+    title: 'Marcador - MFP',
+  },
+}

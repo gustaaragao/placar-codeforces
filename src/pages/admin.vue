@@ -8,7 +8,7 @@
       <div>
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-x-3">
           <Balloon class="size-7 text-m-primary-600 dark:text-m-primary-400 animate-pulse" />
-          Controle de Entrega de Balões
+          {{ t('admin.title') }}
         </h1>
       </div>
 
@@ -20,7 +20,7 @@
           title="Atualizar Submissões"
         >
           <RefreshCw :class="{ 'animate-spin': loading }" class="size-4" />
-          <span>{{ loading ? 'Atualizando...' : 'Atualizar' }}</span>
+          <span>{{ loading ? t('admin.updating') : t('admin.update') }}</span>
         </button>
 
         <button
@@ -30,7 +30,7 @@
           title="Limpar histórico de balões entregues"
         >
           <Trash2 class="size-4" />
-          <span class="hidden sm:inline">Reiniciar Histórico</span>
+          <span class="hidden sm:inline">{{ t('admin.resetHistory') }}</span>
         </button>
       </div>
     </div>
@@ -50,7 +50,7 @@
               : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'
           "
         >
-          <span>Pendentes</span>
+          <span>{{ t('admin.pending') }}</span>
           <span
             class="px-2 py-0.5 text-xs rounded-full font-mono font-bold transition-all"
             :class="
@@ -72,7 +72,7 @@
               : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-200'
           "
         >
-          <span>Entregues</span>
+          <span>{{ t('admin.delivered') }}</span>
           <span
             class="px-2 py-0.5 text-xs rounded-full font-mono font-bold transition-all"
             :class="
@@ -96,7 +96,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Buscar competidora, time ou problema..."
+          :placeholder="t('admin.search')"
           class="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-[#181818] border border-gray-300 dark:border-zinc-800 rounded-lg text-gray-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-m-primary-500/20 focus:border-m-primary-500 transition-colors duration-200"
         />
         <button
@@ -113,7 +113,7 @@
 
     <!-- Mensagem de Última Atualização -->
     <div v-if="lastUpdated" class="text-xs text-gray-500 dark:text-zinc-500 text-right -mt-2">
-      Última verificação: {{ lastUpdated }}
+      {{ t('admin.lastCheck') }}: {{ lastUpdated }}
     </div>
 
     <!-- Área de Conteúdo: Balões Pendentes -->
@@ -124,7 +124,7 @@
       >
         <RefreshCw class="size-8 animate-spin text-m-primary-500" />
         <span class="text-sm text-gray-500 dark:text-zinc-400"
-          >Carregando submissões do contest...</span
+          >{{ t('admin.loadingSubmissions') }}</span
         >
       </div>
 
@@ -137,12 +137,12 @@
         >
           <Check class="size-8" />
         </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Nenhum balão pendente!</h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ t('admin.noPendingTitle') }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
           {{
             searchQuery
-              ? 'Nenhum resultado encontrado para a busca atual.'
-              : 'Todos os balões das submissões aceitas já foram marcados como entregues.'
+              ? t('admin.noPendingSearch')
+              : t('admin.noPendingAll')
           }}
         </p>
       </div>
@@ -214,7 +214,7 @@
               </span>
               <span v-if="item.institution" class="text-gray-300 dark:text-zinc-700">•</span>
               <span class="text-xs text-gray-400 dark:text-zinc-500">
-                {{ item.tries }} {{ item.tries === 1 ? 'tentativa' : 'tentativas' }}
+                {{ t('admin.tries', item.tries) }}
               </span>
             </div>
           </div>
@@ -223,7 +223,7 @@
           <button
             @click="markAsDelivered(item.uniqueId)"
             class="cursor-pointer shrink-0 flex items-center justify-center p-2.5 rounded-lg bg-m-primary-50 hover:bg-m-primary-600 text-m-primary-600 hover:text-white dark:bg-zinc-800 dark:hover:bg-m-primary-600 dark:text-m-primary-400 dark:hover:text-white border border-m-primary-100 dark:border-zinc-700 transition-all duration-200"
-            title="Marcar como entregue"
+            :title="t('admin.markDelivered')"
           >
             <Check class="size-5" />
           </button>
@@ -241,14 +241,12 @@
         >
           <Balloon class="size-8 opacity-50" />
         </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-          Nenhum balão entregue registrado
-        </h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ t('admin.noDeliveredTitle') }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
           {{
             searchQuery
-              ? 'Nenhum resultado encontrado na lista de entregues.'
-              : 'Os balões marcados como entregues aparecerão aqui para registro e possibilidade de desfazer a ação.'
+              ? t('admin.noDeliveredSearch')
+              : t('admin.noDeliveredAll')
           }}
         </p>
       </div>
@@ -307,7 +305,7 @@
             </span>
 
             <span class="text-xs text-gray-400 dark:text-zinc-500 mt-0.5">
-              Entregue com sucesso
+              {{ t('admin.deliveredSuccess') }}
             </span>
           </div>
 
@@ -315,7 +313,7 @@
           <button
             @click="undoDelivery(item.uniqueId)"
             class="cursor-pointer shrink-0 flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-amber-600 hover:bg-amber-50 dark:text-zinc-500 dark:hover:text-amber-400 dark:hover:bg-amber-950/20 transition-all duration-200"
-            title="Desfazer entrega"
+            :title="t('admin.undoDelivery')"
           >
             <RotateCcw class="size-4.5" />
           </button>
@@ -328,8 +326,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { Balloon, Star, RefreshCw, Trash2, Search, Check, RotateCcw } from '@lucide/vue'
+import { useLocale } from '@/composables/useLocale'
 import { fetchCodeforcesData } from '@/utils/api'
 import { parseCodeforcesData } from '@/utils/parser'
+
+const { t } = useLocale()
 
 // Estados
 const loading = ref(true)
@@ -381,11 +382,7 @@ const undoDelivery = (uniqueId) => {
 }
 
 const clearDelivered = () => {
-  if (
-    confirm(
-      'Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.',
-    )
-  ) {
+  if (confirm(t('admin.confirmReset'))) {
     deliveredIds.value.clear()
     saveDeliveredToStorage()
   }

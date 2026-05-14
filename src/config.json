@@ -62,10 +62,8 @@
     },
     "participantes": {
       "greedy-ufs": { "nome": "Gustavo Aragão", "divisao": "UFS" },
-      "dimitt1": { "nome": "Dimitri Martins", "divisao": "UFS" },
-      "feranjos": { "nome": "Fernando Anjos", "divisao": "EM" },
-      "helington": { "nome": "Helington", "divisao": "EM" },
-      "Mulato": { "nome": "Mulato", "divisao": "UFS" }
+      "CauanS": { "nome": "Cauan", "divisao": "EM" },
+      "lopeesss": { "nome": "Bruno", "divisao": "EM" }
     }
   }
 }

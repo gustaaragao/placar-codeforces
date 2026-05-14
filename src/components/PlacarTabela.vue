@@ -14,12 +14,10 @@
             :class="isLoading ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'"
           ></span>
           <span v-if="lastUpdated">
-            Última atualização:
-            <time class="font-mono font-medium text-gray-600 dark:text-zinc-300">{{
-              lastUpdated
-            }}</time>
+            {{ t('table.lastUpdate') }}:
+            <time class="font-mono font-medium text-gray-600 dark:text-zinc-300">{{ lastUpdated }}</time>
           </span>
-          <span v-else class="italic">Carregando...</span>
+          <span v-else class="italic">{{ t('table.loading') }}</span>
         </div>
         <!-- Ações -->
         <div class="flex items-center gap-x-2">
@@ -43,7 +41,7 @@
               <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
               <path d="M21 3v5h-5" />
             </svg>
-            <span>{{ isLoading ? 'Atualizando…' : 'Recarregar' }}</span>
+            <span>{{ isLoading ? t('table.updating') : t('table.reload') }}</span>
           </button>
         </div>
       </div>
@@ -55,8 +53,8 @@
           <tr
             class="bg-gray-100/50 dark:bg-[#202020] border-b border-gray-200 dark:border-zinc-800/80 text-[11px] md:text-xs uppercase tracking-widest text-gray-500 dark:text-zinc-400 transition-colors duration-300"
           >
-            <th class="py-4 px-4 font-semibold w-16 text-center">#</th>
-            <th class="py-4 px-6 font-semibold">Time / Nome</th>
+            <th class="py-4 px-4 font-semibold w-16 text-center">{{ t('table.rank') }}</th>
+            <th class="py-4 px-6 font-semibold">{{ t('table.teamName') }}</th>
             <th
               v-for="problem in problems"
               :key="problem.id"
@@ -65,7 +63,7 @@
               {{ problem.id }}
             </th>
             <th class="py-4 px-6 font-semibold text-center text-gray-600 dark:text-zinc-400">
-              Total
+              {{ t('table.total') }}
             </th>
           </tr>
         </thead>
@@ -162,6 +160,9 @@ import BalaoIcone from '@/components/BalaoIcone.vue'
 import { parseCodeforcesData } from '@/utils/parser'
 import { fetchCodeforcesData } from '@/utils/api'
 import sedeConfig from '@/config.json'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 const props = defineProps({
   filtro: {

@@ -13,9 +13,11 @@
       </h1>
     </div>
 
-    <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <!-- Navegação -->
       <nav
         class="flex items-center gap-1 bg-m-neutral-200/60 dark:bg-m-neutral-800/60 p-1 rounded-lg border border-m-neutral-300/40 dark:border-m-neutral-700/40"
+        :aria-label="t('nav.scoreboard')"
       >
         <NuxtLink
           to="/"
@@ -23,7 +25,7 @@
           active-class="bg-white dark:bg-m-neutral-700 text-m-primary-600 dark:text-m-primary-400 shadow-xs"
           inactive-class="text-m-neutral-600 dark:text-m-neutral-400 hover:text-m-neutral-900 dark:hover:text-m-neutral-200"
         >
-          Placar
+          {{ t('nav.scoreboard') }}
         </NuxtLink>
         <NuxtLink
           to="/admin"
@@ -31,9 +33,14 @@
           active-class="bg-white dark:bg-m-neutral-700 text-m-primary-600 dark:text-m-primary-400 shadow-xs"
           inactive-class="text-m-neutral-600 dark:text-m-neutral-400 hover:text-m-neutral-900 dark:hover:text-m-neutral-200"
         >
-          Admin
+          {{ t('nav.admin') }}
         </NuxtLink>
       </nav>
+
+      <!-- Seletor de Idioma -->
+      <LangSelector />
+
+      <!-- Toggle de Tema -->
       <ThemeToggle />
     </div>
   </header>
@@ -41,4 +48,8 @@
 
 <script setup>
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import LangSelector from '@/components/LangSelector.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 </script>

@@ -18,9 +18,14 @@
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import faviconUrl from '@/assets/logo-mfp.png'
+import { useLocale } from '@/composables/useLocale'
+import { computed } from 'vue'
+
+const { t } = useLocale()
+const pageTitle = computed(() => t('head.title'))
 
 useHead({
-  title: 'Placar - MFP',
+  title: pageTitle,
   link: [{ rel: 'icon', type: 'image/png', href: faviconUrl }],
 })
 </script>
