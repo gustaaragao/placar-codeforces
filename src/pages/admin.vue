@@ -123,9 +123,9 @@
         class="py-16 text-center flex flex-col items-center justify-center gap-3"
       >
         <RefreshCw class="size-8 animate-spin text-m-primary-500" />
-        <span class="text-sm text-gray-500 dark:text-zinc-400"
-          >{{ t('admin.loadingSubmissions') }}</span
-        >
+        <span class="text-sm text-gray-500 dark:text-zinc-400">{{
+          t('admin.loadingSubmissions')
+        }}</span>
       </div>
 
       <div
@@ -137,13 +137,11 @@
         >
           <Check class="size-8" />
         </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ t('admin.noPendingTitle') }}</h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          {{ t('admin.noPendingTitle') }}
+        </h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
-          {{
-            searchQuery
-              ? t('admin.noPendingSearch')
-              : t('admin.noPendingAll')
-          }}
+          {{ searchQuery ? t('admin.noPendingSearch') : t('admin.noPendingAll') }}
         </p>
       </div>
 
@@ -241,13 +239,11 @@
         >
           <Balloon class="size-8 opacity-50" />
         </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ t('admin.noDeliveredTitle') }}</h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          {{ t('admin.noDeliveredTitle') }}
+        </h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mt-1 max-w-md">
-          {{
-            searchQuery
-              ? t('admin.noDeliveredSearch')
-              : t('admin.noDeliveredAll')
-          }}
+          {{ searchQuery ? t('admin.noDeliveredSearch') : t('admin.noDeliveredAll') }}
         </p>
       </div>
       <!-- Lista de Grid de Balões Entregues -->

@@ -8,7 +8,9 @@
         alt="Logo Maratona Feminina de Programação"
         class="size-10 sm:size-12 lg:size-14 shrink-0"
       />
-      <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold text-m-primary-600 dark:text-m-primary-500 leading-tight">
+      <h1
+        class="text-lg sm:text-2xl lg:text-3xl font-bold text-m-primary-600 dark:text-m-primary-500 leading-tight"
+      >
         Maratona Feminina de Programação
       </h1>
     </div>

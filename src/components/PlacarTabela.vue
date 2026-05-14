@@ -15,7 +15,9 @@
           ></span>
           <span v-if="lastUpdated">
             {{ t('table.lastUpdate') }}:
-            <time class="font-mono font-medium text-gray-600 dark:text-zinc-300">{{ lastUpdated }}</time>
+            <time class="font-mono font-medium text-gray-600 dark:text-zinc-300">{{
+              lastUpdated
+            }}</time>
           </span>
           <span v-else class="italic">{{ t('table.loading') }}</span>
         </div>
@@ -47,108 +49,112 @@
       </div>
       <!-- Container com scroll horizontal para telas pequenas -->
       <div class="overflow-x-auto w-full">
-      <table class="w-full text-left border-collapse min-w-[900px]">
-        <thead>
-          <!-- Cabeçalho da Tabela -->
-          <tr
-            class="bg-gray-100/50 dark:bg-[#202020] border-b border-gray-200 dark:border-zinc-800/80 text-[11px] md:text-xs uppercase tracking-widest text-gray-500 dark:text-zinc-400 transition-colors duration-300"
-          >
-            <th class="py-4 px-4 font-semibold w-16 text-center">{{ t('table.rank') }}</th>
-            <th class="py-4 px-6 font-semibold">{{ t('table.teamName') }}</th>
-            <th
-              v-for="problem in problems"
-              :key="problem.id"
-              class="py-4 px-4 font-bold text-center"
+        <table class="w-full text-left border-collapse min-w-225">
+          <thead>
+            <!-- Cabeçalho da Tabela -->
+            <tr
+              class="bg-gray-100/50 dark:bg-[#202020] border-b border-gray-200 dark:border-zinc-800/80 text-[11px] md:text-xs uppercase tracking-widest text-gray-500 dark:text-zinc-400 transition-colors duration-300"
             >
-              {{ problem.id }}
-            </th>
-            <th class="py-4 px-6 font-semibold text-center text-gray-600 dark:text-zinc-400">
-              {{ t('table.total') }}
-            </th>
-          </tr>
-        </thead>
-        <TransitionGroup tag="tbody" name="row-fade" class="text-sm">
-          <tr
-            v-for="(team, index) in teams"
-            :key="team.id"
-            class="border-b border-gray-100 dark:border-zinc-800/40 hover:bg-gray-50 dark:hover:bg-zinc-800/20 transition-colors duration-300"
-            :class="{ 'bg-m-primary-50/30 dark:bg-m-primary-950/20': animatedRanks.has(team.id) }"
-          >
-            <!-- Posição -->
-            <td
-              class="py-4 px-4 text-center font-bold text-gray-700 dark:text-zinc-300 transition-all duration-500"
-              :class="[
-                team.rankColor,
-                {
-                  'scale-125 text-m-primary-600 dark:text-m-primary-400 drop-shadow-sm':
-                    animatedRanks.has(team.id),
-                },
-              ]"
+              <th class="py-4 px-4 font-semibold w-16 text-center">{{ t('table.rank') }}</th>
+              <th class="py-4 px-6 font-semibold">{{ t('table.teamName') }}</th>
+              <th
+                v-for="problem in problems"
+                :key="problem.id"
+                class="py-4 px-4 font-bold text-center"
+              >
+                {{ problem.id }}
+              </th>
+              <th class="py-4 px-6 font-semibold text-center text-gray-600 dark:text-zinc-400">
+                {{ t('table.total') }}
+              </th>
+            </tr>
+          </thead>
+          <TransitionGroup tag="tbody" name="row-fade" class="text-sm">
+            <tr
+              v-for="(team, index) in teams"
+              :key="team.id"
+              class="border-b border-gray-100 dark:border-zinc-800/40 hover:bg-gray-50 dark:hover:bg-zinc-800/20 transition-colors duration-300"
+              :class="{ 'bg-m-primary-50/30 dark:bg-m-primary-950/20': animatedRanks.has(team.id) }"
             >
-              {{ index + 1 }}
-            </td>
-            <!-- Nome do time/participante -->
-            <td class="py-4 px-6">
-              <div class="flex items-center gap-4">
-                <div class="flex flex-col gap-y-1">
-                  <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">{{
-                    team.name
-                  }}</span>
-                  <span class="text-xs text-gray-500 dark:text-zinc-400" v-if="team.institution">{{
-                    team.institution
-                  }}</span>
-                  <!-- Medalhas por categoria (visíveis no filtro de Sede) -->
-                  <div
-                    v-if="filtro === 'sede' && medalsByTeam[team.id]?.length"
-                    class="flex flex-wrap gap-1 mt-0.5"
-                  >
+              <!-- Posição -->
+              <td
+                class="py-4 px-4 text-center font-bold text-gray-700 dark:text-zinc-300 transition-all duration-500"
+                :class="[
+                  team.rankColor,
+                  {
+                    'scale-125 text-m-primary-600 dark:text-m-primary-400 drop-shadow-sm':
+                      animatedRanks.has(team.id),
+                  },
+                ]"
+              >
+                {{ index + 1 }}
+              </td>
+              <!-- Nome do time/participante -->
+              <td class="py-4 px-6">
+                <div class="flex items-center gap-4">
+                  <div class="flex flex-col gap-y-1">
+                    <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">{{
+                      team.name
+                    }}</span>
                     <span
-                      v-for="medal in medalsByTeam[team.id]"
-                      :key="medal.categoria"
-                      class="inline-flex items-center gap-x-1 text-[11px] font-semibold px-1.5 py-0.5 rounded-md border"
-                      :class="medal.classes"
-                      :title="`${medal.categoriaLabel}: ${medal.posicao}º lugar`"
+                      class="text-xs text-gray-500 dark:text-zinc-400"
+                      v-if="team.institution"
+                      >{{ team.institution }}</span
                     >
-                      <span>{{ medal.emoji }}</span>
-                      <span>{{ medal.categoriaLabel }}</span>
-                    </span>
+                    <!-- Medalhas por categoria (visíveis no filtro de Sede) -->
+                    <div
+                      v-if="filtro === 'sede' && medalsByTeam[team.id]?.length"
+                      class="flex flex-wrap gap-1 mt-0.5"
+                    >
+                      <span
+                        v-for="medal in medalsByTeam[team.id]"
+                        :key="medal.categoria"
+                        class="inline-flex items-center gap-x-1 text-[11px] font-semibold px-1.5 py-0.5 rounded-md border"
+                        :class="medal.classes"
+                        :title="`${medal.categoriaLabel}: ${medal.posicao}º lugar`"
+                      >
+                        <span>{{ medal.emoji }}</span>
+                        <span>{{ medal.categoriaLabel }}</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </td>
-            <!-- Problemas -->
-            <td v-for="problem in problems" :key="problem.id" class="py-4 px-4 align-middle">
-              <div class="flex justify-center">
-                <BalaoIcone
-                  v-if="team.scores[problem.id]"
-                  :estado="team.scores[problem.id].solved ? 'resolvido' : 'tentado'"
-                  :cor="problem.color"
-                  :tentativas="team.scores[problem.id].tries"
-                  :tempo="team.scores[problem.id].time"
-                  :isFirst="team.scores[problem.id].first"
-                  :animar="animatedBalloons.has(`${team.id}-${problem.id}`)"
-                />
-              </div>
-            </td>
-            <!-- Pontuação Total-->
-            <td class="py-4 px-6 text-center">
-              <div
-                class="flex flex-col items-center transition-all duration-500 rounded-lg p-1"
-                :class="{
-                  'bg-m-primary-50 dark:bg-m-primary-950/50 scale-110': animatedScores.has(team.id),
-                }"
-              >
-                <span class="font-bold text-gray-900 dark:text-zinc-100 text-base">{{
-                  team.totalSolved
-                }}</span>
-                <span class="text-xs text-gray-500 dark:text-zinc-400 font-mono mt-0.5"
-                  >({{ team.totalPenalty }})</span
+              </td>
+              <!-- Problemas -->
+              <td v-for="problem in problems" :key="problem.id" class="py-4 px-4 align-middle">
+                <div class="flex justify-center">
+                  <BalaoIcone
+                    v-if="team.scores[problem.id]"
+                    :estado="team.scores[problem.id].solved ? 'resolvido' : 'tentado'"
+                    :cor="problem.color"
+                    :tentativas="team.scores[problem.id].tries"
+                    :tempo="team.scores[problem.id].time"
+                    :isFirst="team.scores[problem.id].first"
+                    :animar="animatedBalloons.has(`${team.id}-${problem.id}`)"
+                  />
+                </div>
+              </td>
+              <!-- Pontuação Total-->
+              <td class="py-4 px-6 text-center">
+                <div
+                  class="flex flex-col items-center transition-all duration-500 rounded-lg p-1"
+                  :class="{
+                    'bg-m-primary-50 dark:bg-m-primary-950/50 scale-110': animatedScores.has(
+                      team.id,
+                    ),
+                  }"
                 >
-              </div>
-            </td>
-          </tr>
-        </TransitionGroup>
-      </table>
+                  <span class="font-bold text-gray-900 dark:text-zinc-100 text-base">{{
+                    team.totalSolved
+                  }}</span>
+                  <span class="text-xs text-gray-500 dark:text-zinc-400 font-mono mt-0.5"
+                    >({{ team.totalPenalty }})</span
+                  >
+                </div>
+              </td>
+            </tr>
+          </TransitionGroup>
+        </table>
       </div>
     </div>
   </div>

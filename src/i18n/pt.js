@@ -31,12 +31,14 @@ export default {
     noPendingAll: 'Todos os balões das submissões aceitas já foram marcados como entregues.',
     noDeliveredTitle: 'Nenhum balão entregue registrado',
     noDeliveredSearch: 'Nenhum resultado encontrado na lista de entregues.',
-    noDeliveredAll: 'Os balões marcados como entregues aparecerão aqui para registro e possibilidade de desfazer a ação.',
+    noDeliveredAll:
+      'Os balões marcados como entregues aparecerão aqui para registro e possibilidade de desfazer a ação.',
     markDelivered: 'Marcar como entregue',
     undoDelivery: 'Desfazer entrega',
     deliveredSuccess: 'Entregue com sucesso',
     tries: (n) => `${n} ${n === 1 ? 'tentativa' : 'tentativas'}`,
-    confirmReset: 'Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.',
+    confirmReset:
+      'Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.',
   },
   footer: {
     credit: 'Aplicação desenvolvida pelo',
