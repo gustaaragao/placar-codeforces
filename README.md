@@ -152,7 +152,7 @@ A aplicação estará disponível em: **http://localhost:3000**
 
 ## 🐳 Deploy com Docker
 
-### Opção 1 — Docker Compose (recomendado)
+### Docker Compose (recomendado)
 
 ```bash
 # 1. Garanta que o .env está preenchido
@@ -181,12 +181,6 @@ server/
 src/
 ├── assets/             # Imagens e estilos globais
 ├── components/
-│   ├── AppHeader.vue   # Cabeçalho com navegação e tema
-│   ├── AppFooter.vue   # Rodapé com créditos e links
-│   ├── BalaoIcone.vue  # Ícone de balão com animações
-│   ├── PlacarTabela.vue# Tabela principal de classificação
-│   ├── ThemeToggle.vue # Alternância Light/Dark Mode
-│   └── ToggleButton.vue# Filtro Geral/Sede
 ├── pages/
 │   ├── index.vue       # Placar principal
 │   └── admin.vue       # Painel de controle de entregas de balões
