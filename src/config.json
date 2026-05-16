@@ -63,7 +63,8 @@
     "participantes": {
       "greedy-ufs": { "nome": "Gustavo Aragão", "divisao": "UFS" },
       "CauanS": { "nome": "Cauan", "divisao": "EM" },
-      "lopeesss": { "nome": "Bruno", "divisao": "EM" }
+      "lopeesss": { "nome": "Bruno", "divisao": "EM" },
+      "jeroenodb": { "nome": "Jeron", "divisao": "UFS" }
     }
   }
 }

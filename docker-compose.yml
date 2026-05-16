@@ -5,23 +5,11 @@ services:
       dockerfile: Dockerfile
     container_name: placar-mfp
     restart: unless-stopped
-    expose:
-      - '3000'
+    ports:
+      - '3000:3000'
     env_file:
       - .env
     environment:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 3000
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx-proxy
-    restart: unless-stopped
-    ports:
-      - '80:80'
-
-    depends_on:
-      - placar
