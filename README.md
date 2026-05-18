@@ -87,25 +87,37 @@ Configura os times e participantes da sua sede para o placar filtrado e o sistem
 
 ```json
 "sedeLocal": {
-  "instituicao": "UFS",
+  "instituicao": "Sede Local",
   "divisoes": {
     "UFS": { "label": "UFS" },
     "EM": { "label": "Ensino Médio" }
   },
   "participantes": {
-    "handle-codeforces": { "nome": "Nome Completo", "divisao": "UFS" },
-    "outro-handle": { "nome": "Outro Nome", "divisao": "EM" }
+    "handle-codeforces": { 
+      "nome": "Nome Completo", 
+      "divisao": "UFS",
+      "laboratorio": "D1",
+      "instituicao": "Universidade Federal de Sergipe"
+    },
+    "outro-handle": { 
+      "nome": "Outro Nome", 
+      "divisao": "EM",
+      "laboratorio": "D2",
+      "instituicao": "Colégio de Aplicação (CODAP)"
+    }
   }
 }
 ```
 
 | Campo                           | Tipo     | Descrição                                                                            |
 | ------------------------------- | -------- | ------------------------------------------------------------------------------------ |
-| `instituicao`                   | `string` | Nome da sede exibido abaixo do nome do time                                          |
+| `instituicao`                   | `string` | Nome global padrão da sede (usado se o participante não tiver uma instituição própria) |
 | `divisoes`                      | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha |
 | `participantes`                 | `object` | Mapeamento de `handle do Codeforces` → dados da participante                         |
 | `participantes[handle].nome`    | `string` | Nome real da competidora                                                             |
 | `participantes[handle].divisao` | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                  |
+| `participantes[handle].laboratorio` | `string` | Sala/Laboratório onde o competidor está (útil para o painel de entrega de balões) |
+| `participantes[handle].instituicao` | `string` | Instituição de ensino específica que o competidor representa (sobrescreve a global) |
 
 **Como o sistema de medalhas funciona:**
 

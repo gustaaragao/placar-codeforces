@@ -55,16 +55,51 @@
     }
   },
   "sedeLocal": {
-    "instituicao": "UFS",
+    "instituicao": "Sede Local",
+    "laboratorios": [
+      {
+        "nome": "D1",
+        "capacidade": 30
+      },
+      {
+        "nome": "D2",
+        "capacidade": 30
+      },
+      {
+        "nome": "D3",
+        "capacidade": 30
+      }
+    ],
     "divisoes": {
-      "UFS": { "label": "UFS" },
-      "EM": { "label": "Ensino Médio" }
+      "UFS": {
+        "label": "UFS"
+      },
+      "EM": {
+        "label": "Ensino Médio"
+      },
+      "Geral": {
+        "label": "Geral"
+      }
     },
     "participantes": {
-      "greedy-ufs": { "nome": "Gustavo Aragão", "divisao": "UFS" },
-      "CauanS": { "nome": "Cauan", "divisao": "EM" },
-      "lopeesss": { "nome": "Bruno", "divisao": "EM" },
-      "jeroenodb": { "nome": "Jeron", "divisao": "UFS" }
+      "jeroenodb": {
+        "nome": "Gustavo Henrique Aragão Silva",
+        "divisao": "EM",
+        "laboratorio": "D1",
+        "instituicao": "Colégio de Aplicação (CODAP)"
+      },
+      "feranjos": {
+        "nome": "Mariana Aragão Soares",
+        "divisao": "Geral",
+        "laboratorio": "D1",
+        "instituicao": "UNIT - Aracaju"
+      },
+      "helington": {
+        "nome": "Maria Clara Aragão Soares",
+        "divisao": "UFS",
+        "laboratorio": "D1",
+        "instituicao": "UFS - São Cristóvão"
+      }
     }
   }
 }

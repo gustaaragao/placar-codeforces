@@ -15,14 +15,23 @@
 <script setup>
 import PlacarTabela from '@/components/PlacarTabela.vue'
 import ToggleButton from '@/components/ToggleButton.vue'
+import config from '@/config.json'
 import { ref, computed } from 'vue'
 import { useLocale } from '@/composables/useLocale'
 
 const filtroPlacar = ref('geral')
 const { t } = useLocale()
 
-const filterOptions = computed(() => [
-  { label: t('filter.general'), value: 'geral' },
-  { label: t('filter.local'), value: 'sede' },
-])
+const filterOptions = computed(() => {
+  const localLabel = t('filter.local')
+  const instName = config.sedeLocal.instituicao
+  const finalLocalLabel = instName && instName.toLowerCase() !== localLabel.toLowerCase()
+    ? `${localLabel} - ${instName}`
+    : localLabel
+
+  return [
+    { label: t('filter.general'), value: 'geral' },
+    { label: finalLocalLabel, value: 'sede' },
+  ]
+})
 </script>

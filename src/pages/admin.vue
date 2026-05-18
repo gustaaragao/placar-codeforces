@@ -86,6 +86,23 @@
         </button>
       </div>
 
+      <!-- Filtro de Laboratório -->
+      <div class="flex flex-wrap gap-2 items-center" v-if="availableLabs.length > 1">
+        <button
+          v-for="lab in availableLabs"
+          :key="lab"
+          @click="filterLab = lab"
+          class="cursor-pointer px-3 py-1.5 text-xs font-semibold rounded-lg transition-all duration-200 border"
+          :class="
+            filterLab === lab
+              ? 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800 shadow-sm'
+              : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 dark:bg-[#181818] dark:text-zinc-400 dark:border-zinc-800 dark:hover:bg-[#202020]'
+          "
+        >
+          {{ lab === 'Todos' ? 'Mostrar Todos' : `Apenas ${lab}` }}
+        </button>
+      </div>
+
       <!-- Campo de Busca -->
       <div class="relative w-full md:w-80">
         <span
@@ -200,17 +217,18 @@
               class="font-bold text-gray-900 dark:text-zinc-100 text-base truncate tracking-tight mt-1"
               :title="item.teamName"
             >
-              {{ item.teamName }}
+              {{ getShortName(item.teamName) }}
+              {{ getCodeforcesName(item.teamName) }}
             </span>
 
             <div class="flex items-center gap-x-2 mt-0.5">
               <span
-                v-if="item.institution"
-                class="text-xs text-gray-500 dark:text-zinc-400 truncate max-w-30"
+                v-if="item.laboratorio"
+                class="inline-flex items-center gap-x-1 text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800"
+                title="Laboratório"
               >
-                {{ item.institution }}
+                📍 {{ item.laboratorio }}
               </span>
-              <span v-if="item.institution" class="text-gray-300 dark:text-zinc-700">•</span>
               <span class="text-xs text-gray-400 dark:text-zinc-500">
                 {{ t('admin.tries', item.tries) }}
               </span>
@@ -297,12 +315,21 @@
               class="font-bold text-gray-700 dark:text-zinc-300 text-base truncate tracking-tight mt-1"
               :title="item.teamName"
             >
-              {{ item.teamName }}
+              {{ getShortName(item.teamName) }}
             </span>
 
-            <span class="text-xs text-gray-400 dark:text-zinc-500 mt-0.5">
-              {{ t('admin.deliveredSuccess') }}
-            </span>
+            <div class="flex items-center gap-x-2 mt-0.5">
+              <span
+                v-if="item.laboratorio"
+                class="inline-flex items-center gap-x-1 text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-gray-100 text-gray-500 dark:bg-zinc-800 dark:text-zinc-400 border border-gray-200 dark:border-zinc-700"
+                title="Laboratório"
+              >
+                📍 {{ item.laboratorio }}
+              </span>
+              <span class="text-xs text-gray-400 dark:text-zinc-500">
+                {{ t('admin.deliveredSuccess') }}
+              </span>
+            </div>
           </div>
 
           <!-- Seção Direita: Botão de Ação (Desfazer) -->
@@ -324,7 +351,8 @@ import { ref, computed, onMounted } from 'vue'
 import { Balloon, Star, RefreshCw, Trash2, Search, Check, RotateCcw } from '@lucide/vue'
 import { useLocale } from '@/composables/useLocale'
 import { fetchCodeforcesData } from '@/utils/api'
-import { parseCodeforcesData } from '@/utils/parser'
+import { parseCodeforcesData, getShortName, getCodeforcesName } from '@/utils/parser'
+import sedeConfig from '@/config.json'
 
 const { t } = useLocale()
 
@@ -333,6 +361,7 @@ const loading = ref(true)
 const lastUpdated = ref(null)
 const searchQuery = ref('')
 const activeTab = ref('pendentes')
+const filterLab = ref('Todos')
 const allBalloons = ref([])
 const deliveredIds = ref(new Set())
 
@@ -410,6 +439,7 @@ const loadData = async () => {
                   uniqueId: `${team.id}-${pId}`,
                   teamName: team.name,
                   institution: team.institution || '',
+                  laboratorio: team.laboratorio || '',
                   problemId: pId,
                   problemName,
                   color,
@@ -444,16 +474,40 @@ const loadData = async () => {
 }
 
 // Listas Computadas
-const filteredBalloons = computed(() => {
-  const q = searchQuery.value.toLowerCase().trim()
-  if (!q) return allBalloons.value
+const availableLabs = computed(() => {
+  // Começar com todos os laboratórios definidos no config
+  const cfgLabs = (sedeConfig && sedeConfig.sedeLocal && sedeConfig.sedeLocal.laboratorios) || []
+  const names = cfgLabs.map((l) => l.nome)
 
-  return allBalloons.value.filter((b) => {
+  // Garantir inclusão dos laboratórios detectados dinamicamente
+  const detected = new Set()
+  allBalloons.value.forEach((b) => {
+    if (b.laboratorio) detected.add(b.laboratorio)
+  })
+
+  const merged = Array.from(new Set([...names, ...Array.from(detected)]))
+  // Colocar "Todos" na frente e ordenar o restante
+  const rest = merged.filter((n) => n !== 'Todos').sort((a, b) => a.localeCompare(b))
+  return ['Todos', ...rest]
+})
+
+const filteredBalloons = computed(() => {
+  let list = allBalloons.value
+
+  if (filterLab.value !== 'Todos') {
+    list = list.filter((b) => b.laboratorio === filterLab.value)
+  }
+
+  const q = searchQuery.value.toLowerCase().trim()
+  if (!q) return list
+
+  return list.filter((b) => {
     const matchName = b.teamName.toLowerCase().includes(q)
     const matchInst = b.institution.toLowerCase().includes(q)
     const matchProbId = b.problemId.toLowerCase().includes(q)
     const matchProbName = b.problemName.toLowerCase().includes(q)
-    return matchName || matchInst || matchProbId || matchProbName
+    const matchLab = b.laboratorio.toLowerCase().includes(q)
+    return matchName || matchInst || matchProbId || matchProbName || matchLab
   })
 })
 

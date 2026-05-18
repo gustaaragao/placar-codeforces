@@ -71,7 +71,9 @@ export function parseCodeforcesData(cfData) {
         : row.party.teamName
       : baseMembersStr
 
-    const institution = isLocal ? config.sedeLocal.instituicao : ''
+    const institution = isLocal
+      ? localMember?.info?.instituicao || config.sedeLocal.instituicao
+      : ''
 
     const scores = {}
     row.problemResults.forEach((res, idx) => {
@@ -101,6 +103,7 @@ export function parseCodeforcesData(cfData) {
       institution,
       isLocal,
       divisao,
+      laboratorio: localMember?.info?.laboratorio || null,
       scores,
       totalSolved: row.points,
       totalPenalty: row.penalty,
@@ -108,4 +111,21 @@ export function parseCodeforcesData(cfData) {
   })
 
   return { problems, teams }
+}
+
+export const getShortName = (fullName) => {
+  if (!fullName || typeof fullName !== 'string') return fullName
+
+  const parts = fullName.trim().split(/\s+/)
+
+  if (parts.length === 1) return parts[0] // "Gustavo" -> "Gustavo"
+  if (parts.length === 2) return fullName // "Gustavo Silva" -> "Gustavo Silva"
+
+  return `${parts[0]} ${parts[parts.length - 2]}` // "Gustavo Henrique Aragão" -> "Gustavo Aragão"
+}
+
+export const getCodeforcesName = (fullName) => {
+  const parts = fullName.trim().split(/\s+/)
+
+  return parts[parts.length - 1]
 }
