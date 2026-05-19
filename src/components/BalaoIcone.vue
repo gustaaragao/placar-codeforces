@@ -32,13 +32,13 @@
         class="absolute -top-1.5 -right-1.5 stroke-[1px] stroke-m-neutral-800 dark:stroke-white"
       />
 
-      <!-- Tempo/tentativas: badge posicionado no canto superior direito do card -->
+      <!-- Tempo/tentativas: badge posicionado abaixo do balão -->
       <div
         v-if="estado !== 'vazio' && tentativas !== undefined"
-        class="absolute -top-2 -right-2 flex items-center justify-center"
+        class="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center"
       >
         <div
-          class="text-[11px] font-mono leading-none px-2 py-0.5 rounded-md bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-sm flex items-center justify-center"
+          class="text-xs font-mono leading-none px-2 py-0.5 rounded-md flex items-center justify-center"
         >
           <span
             v-if="estado === 'resolvido'"
