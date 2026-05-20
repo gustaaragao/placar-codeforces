@@ -42,6 +42,7 @@ export default {
   },
   footer: {
     credit: 'Application developed by',
+    partner: 'in partnership with',
     repo: 'Repository',
   },
   head: {

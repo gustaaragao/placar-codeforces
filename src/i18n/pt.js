@@ -41,7 +41,8 @@ export default {
       'Tem certeza que deseja limpar todo o histórico de balões entregues? Essa ação reiniciará a lista para todos os problemas resolvidos.',
   },
   footer: {
-    credit: 'Aplicação desenvolvida pelo',
+    credit: 'Aplicação desenvolvida pela',
+    partner: 'em parceria com',
     repo: 'Repositório',
   },
   head: {
