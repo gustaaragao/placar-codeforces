@@ -1,4 +1,9 @@
 {
+  "evento": {
+    "nome": "Maratona Feminina de Programação",
+    "icone": "/logo-mfp.png",
+    "corBase": "text-m-primary-600 dark:text-m-primary-500"
+  },
   "intervaloRequisicao": 60000,
   "baloes": {
     "A": {

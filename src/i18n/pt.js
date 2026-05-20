@@ -46,6 +46,6 @@ export default {
     repo: 'Repositório',
   },
   head: {
-    title: 'Placar - MFP',
+    title: 'Placar',
   },
 }

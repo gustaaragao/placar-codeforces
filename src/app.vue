@@ -17,15 +17,16 @@
 <script setup>
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
-import faviconUrl from '@/assets/logo-mfp.png'
 import { useLocale } from '@/composables/useLocale'
 import { computed } from 'vue'
+import config from '@/config.json'
 
 const { t } = useLocale()
-const pageTitle = computed(() => t('head.title'))
+const evento = config.evento || {}
+const pageTitle = computed(() => t('head.title') + (evento.nome ? ` - ${evento.nome}` : ''))
 
 useHead({
   title: pageTitle,
-  link: [{ rel: 'icon', type: 'image/png', href: faviconUrl }],
+  link: [{ rel: 'icon', type: 'image/png', href: evento.icone || '/icon.png' }],
 })
 </script>

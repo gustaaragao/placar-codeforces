@@ -46,6 +46,6 @@ export default {
     repo: 'Repositorio',
   },
   head: {
-    title: 'Marcador - MFP',
+    title: 'Marcador',
   },
 }

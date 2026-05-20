@@ -4,14 +4,16 @@
   >
     <div class="flex gap-x-3 items-center min-w-0">
       <img
-        src="@/assets/logo-mfp.png"
-        alt="Logo Maratona Feminina de Programação"
+        v-if="evento.icone"
+        :src="evento.icone"
+        :alt="'Logo ' + evento.nome"
         class="size-10 sm:size-12 lg:size-14 shrink-0"
       />
       <h1
-        class="text-lg sm:text-2xl lg:text-3xl font-bold text-m-primary-600 dark:text-m-primary-500 leading-tight"
+        class="text-lg sm:text-2xl lg:text-3xl font-bold leading-tight"
+        :class="evento.corBase"
       >
-        Maratona Feminina de Programação
+        {{ evento.nome }}
       </h1>
     </div>
 
@@ -52,6 +54,13 @@
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LangSelector from '@/components/LangSelector.vue'
 import { useLocale } from '@/composables/useLocale'
+import config from '@/config.json'
 
 const { t } = useLocale()
+
+const evento = config.evento || {
+  nome: "Maratona de Programação",
+  icone: "",
+  corBase: "text-m-primary-600 dark:text-m-primary-500"
+}
 </script>

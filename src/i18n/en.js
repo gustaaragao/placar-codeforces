@@ -46,6 +46,6 @@ export default {
     repo: 'Repository',
   },
   head: {
-    title: 'Scoreboard - MFP',
+    title: 'Scoreboard',
   },
 }

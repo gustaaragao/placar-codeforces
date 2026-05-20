@@ -57,9 +57,27 @@ CONTEST_ID=id_do_contest
 
 ### 2. Configuração do Contest (`src/config.json`)
 
-O arquivo `src/config.json` é o único arquivo que você precisa editar para adaptar o sistema ao seu evento. Ele contém duas seções principais:
+O arquivo `src/config.json` é o único arquivo que você precisa editar para adaptar o sistema ao seu evento. Ele contém três seções principais:
 
-#### 2.1 Balões (`baloes`)
+#### 2.1 Evento (`evento`)
+
+Configura a identidade visual ("white label") do seu placar, incluindo nome da competição, ícone e cor de destaque do título.
+
+```json
+"evento": {
+  "nome": "Maratona Feminina de Programação",
+  "icone": "/logo-mfp.png",
+  "corBase": "text-m-primary-600 dark:text-m-primary-500"
+}
+```
+
+| Campo | Tipo | Descrição |
+| --- | --- | --- |
+| `nome` | `string` | Nome da sua competição, exibido no cabeçalho e no título da página (aba do navegador) |
+| `icone` | `string` | Caminho para o logo/ícone do evento (ex: coloque a imagem na pasta `public/` e referencie como `/imagem.png`). É exibido no cabeçalho e também utilizado como favicon. Opcional. |
+| `corBase` | `string` | Classes do Tailwind CSS que definem a cor do título do evento no cabeçalho |
+
+#### 2.2 Balões (`baloes`)
 
 Mapeie a letra de cada problema à cor e ao nome do balão correspondente. Isso controla a cor exibida no placar e no painel de administração.
 
@@ -82,7 +100,7 @@ Mapeie a letra de cada problema à cor e ao nome do balão correspondente. Isso 
 | `cor`  | `string` (hex) | Cor hexadecimal do balão físico                  |
 | `nome` | `string`       | Nome descritivo da cor (exibido no painel admin) |
 
-#### 2.2 Sede Local (`sedeLocal`)
+#### 2.3 Sede Local (`sedeLocal`)
 
 Configura os times e participantes da sua sede para o placar filtrado e o sistema de medalhas.
 
