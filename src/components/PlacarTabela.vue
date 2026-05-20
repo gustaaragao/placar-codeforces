@@ -161,14 +161,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import BalaoIcone from '@/components/BalaoIcone.vue'
 import { parseCodeforcesData } from '@/utils/parser'
 import { fetchCodeforcesData } from '@/utils/api'
-import sedeConfig from '@/config.json'
 import { useLocale } from '@/composables/useLocale'
+import { useSede } from '@/composables/useSede'
 
 const { t } = useLocale()
+const { activeSede } = useSede()
 
 const props = defineProps({
   filtro: {
@@ -242,7 +243,7 @@ const medalsByTeam = computed(() => {
   assignMedals(localTeams, 'GERAL', 'Geral')
 
   // 2. Por cada divisão configurada
-  const divisoes = sedeConfig.sedeLocal.divisoes || {}
+  const divisoes = activeSede.value.divisoes || {}
   Object.entries(divisoes).forEach(([divKey, divInfo]) => {
     const divTeams = localTeams.filter((t) => t.divisao === divKey)
     if (divTeams.length) {
@@ -267,7 +268,7 @@ const loadData = async (isFirstLoad = false) => {
   if (!cfData) return
   lastUpdated.value = formatTimestamp()
 
-  const parsed = parseCodeforcesData(cfData)
+  const parsed = parseCodeforcesData(cfData, activeSede.value)
   problems.value = parsed.problems
 
   if (isFirstLoad || allTeams.value.length === 0) {
@@ -339,10 +340,14 @@ const handleReload = async () => {
   await loadData(false)
 }
 
+watch(activeSede, () => {
+  loadData(true)
+})
+
 onMounted(async () => {
   await loadData(true)
-  const intervalo = sedeConfig.intervaloRequisicao || 60000
-  intervalId = setInterval(() => loadData(false), intervalo)
+  // interval configs can be improved later
+  intervalId = setInterval(() => loadData(false), 60000)
 })
 
 onUnmounted(() => {

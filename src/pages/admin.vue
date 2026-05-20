@@ -347,14 +347,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { Balloon, Star, RefreshCw, Trash2, Search, Check, RotateCcw } from '@lucide/vue'
 import { useLocale } from '@/composables/useLocale'
+import { useSede } from '@/composables/useSede'
 import { fetchCodeforcesData } from '@/utils/api'
 import { parseCodeforcesData, getShortName, getCodeforcesName } from '@/utils/parser'
-import sedeConfig from '@/config.json'
 
 const { t } = useLocale()
+const { activeSede } = useSede()
 
 // Estados
 const loading = ref(true)
@@ -419,7 +420,7 @@ const loadData = async () => {
   try {
     const cfData = await fetchCodeforcesData()
     if (cfData) {
-      const parsed = parseCodeforcesData(cfData)
+      const parsed = parseCodeforcesData(cfData, activeSede.value)
 
       const list = []
       if (parsed && parsed.teams) {
@@ -475,8 +476,8 @@ const loadData = async () => {
 
 // Listas Computadas
 const availableLabs = computed(() => {
-  // Começar com todos os laboratórios definidos no config
-  const cfgLabs = (sedeConfig && sedeConfig.sedeLocal && sedeConfig.sedeLocal.laboratorios) || []
+  // Começar com todos os laboratórios definidos no config da sede ativa
+  const cfgLabs = activeSede.value.laboratorios || []
   const names = cfgLabs.map((l) => l.nome)
 
   // Garantir inclusão dos laboratórios detectados dinamicamente
@@ -517,6 +518,10 @@ const pendingBalloons = computed(() => {
 
 const deliveredBalloons = computed(() => {
   return filteredBalloons.value.filter((b) => deliveredIds.value.has(b.uniqueId))
+})
+
+watch(activeSede, () => {
+  loadData()
 })
 
 // Inicialização

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative inline-flex items-center w-full sm:w-65 p-1 rounded-full border border-[#D1D1D6] bg-[#E8E8ED] dark:border-[#2C2C2E] dark:bg-[#1C1C1E]"
+    class="relative inline-flex items-center w-full sm:w-80 p-1 rounded-full border border-[#D1D1D6] bg-[#E8E8ED] dark:border-[#2C2C2E] dark:bg-[#1C1C1E]"
   >
     <div
       class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-full bg-[#A65AE4] transition-transform duration-300 ease-in-out"

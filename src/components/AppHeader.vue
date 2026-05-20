@@ -9,10 +9,7 @@
         :alt="'Logo ' + evento.nome"
         class="size-10 sm:size-12 lg:size-14 shrink-0"
       />
-      <h1
-        class="text-lg sm:text-2xl lg:text-3xl font-bold leading-tight"
-        :class="evento.corBase"
-      >
+      <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold leading-tight" :class="evento.corBase">
         {{ evento.nome }}
       </h1>
     </div>
@@ -41,6 +38,9 @@
         </NuxtLink>
       </nav>
 
+      <!-- Seletor de Sede -->
+      <SedeSelector />
+
       <!-- Seletor de Idioma -->
       <LangSelector />
 
@@ -53,14 +53,15 @@
 <script setup>
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LangSelector from '@/components/LangSelector.vue'
+import SedeSelector from '@/components/SedeSelector.vue'
 import { useLocale } from '@/composables/useLocale'
 import config from '@/config.json'
 
 const { t } = useLocale()
 
 const evento = config.evento || {
-  nome: "Maratona de Programação",
-  icone: "",
-  corBase: "text-m-primary-600 dark:text-m-primary-500"
+  nome: 'Maratona de Programação',
+  icone: '',
+  corBase: 'text-m-primary-600 dark:text-m-primary-500',
 }
 </script>

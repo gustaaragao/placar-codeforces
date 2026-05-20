@@ -71,11 +71,11 @@ Configura a identidade visual ("white label") do seu placar, incluindo nome da c
 }
 ```
 
-| Campo | Tipo | Descrição |
-| --- | --- | --- |
-| `nome` | `string` | Nome da sua competição, exibido no cabeçalho e no título da página (aba do navegador) |
-| `icone` | `string` | Caminho para o logo/ícone do evento (ex: coloque a imagem na pasta `public/` e referencie como `/imagem.png`). É exibido no cabeçalho e também utilizado como favicon. Opcional. |
-| `corBase` | `string` | Classes do Tailwind CSS que definem a cor do título do evento no cabeçalho |
+| Campo     | Tipo     | Descrição                                                                                                                                                                        |
+| --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `nome`    | `string` | Nome da sua competição, exibido no cabeçalho e no título da página (aba do navegador)                                                                                            |
+| `icone`   | `string` | Caminho para o logo/ícone do evento (ex: coloque a imagem na pasta `public/` e referencie como `/imagem.png`). É exibido no cabeçalho e também utilizado como favicon. Opcional. |
+| `corBase` | `string` | Classes do Tailwind CSS que definem a cor do título do evento no cabeçalho                                                                                                       |
 
 #### 2.2 Balões (`baloes`)
 
@@ -100,43 +100,47 @@ Mapeie a letra de cada problema à cor e ao nome do balão correspondente. Isso 
 | `cor`  | `string` (hex) | Cor hexadecimal do balão físico                  |
 | `nome` | `string`       | Nome descritivo da cor (exibido no painel admin) |
 
-#### 2.3 Sede Local (`sedeLocal`)
+#### 2.3 Sedes Locais (`sedesLocais`)
 
-Configura os times e participantes da sua sede para o placar filtrado e o sistema de medalhas.
+Configura um array contendo todas as sedes que participam do seu evento. Isso permite alternar entre elas no placar, visualizar painéis administrativos individuais de balões para cada sede e gerenciar times filtrados por local.
 
 ```json
-"sedeLocal": {
-  "instituicao": "Sede Local",
-  "divisoes": {
-    "UFS": { "label": "UFS" },
-    "EM": { "label": "Ensino Médio" }
-  },
-  "participantes": {
-    "handle-codeforces": {
-      "nome": "Nome Completo",
-      "divisao": "UFS",
-      "laboratorio": "D1",
-      "instituicao": "Universidade Federal de Sergipe"
+"sedesLocais": [
+  {
+    "nome": "Sede Aracaju",
+    "instituicao": "UFS - Campus São Cristóvão",
+    "divisoes": {
+      "UFS": { "label": "UFS" },
+      "EM": { "label": "Ensino Médio" }
     },
-    "outro-handle": {
-      "nome": "Outro Nome",
-      "divisao": "EM",
-      "laboratorio": "D2",
-      "instituicao": "Colégio de Aplicação (CODAP)"
+    "participantes": {
+      "handle-codeforces": {
+        "nome": "Nome Completo",
+        "divisao": "UFS",
+        "laboratorio": "D1",
+        "instituicao": "Universidade Federal de Sergipe"
+      },
+      "outro-handle": {
+        "nome": "Outro Nome",
+        "divisao": "EM",
+        "laboratorio": "D2",
+        "instituicao": "Colégio de Aplicação (CODAP)"
+      }
     }
   }
-}
+]
 ```
 
-| Campo                               | Tipo     | Descrição                                                                              |
-| ----------------------------------- | -------- | -------------------------------------------------------------------------------------- |
-| `instituicao`                       | `string` | Nome global padrão da sede (usado se o participante não tiver uma instituição própria) |
-| `divisoes`                          | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha   |
-| `participantes`                     | `object` | Mapeamento de `handle do Codeforces` → dados da participante                           |
-| `participantes[handle].nome`        | `string` | Nome real da competidor                                                                |
-| `participantes[handle].divisao`     | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                    |
-| `participantes[handle].laboratorio` | `string` | Sala/Laboratório onde o competidor está (útil para o painel de entrega de balões)      |
-| `participantes[handle].instituicao` | `string` | Instituição de ensino específica que o competidor representa (sobrescreve a global)    |
+| Campo                               | Tipo     | Descrição                                                                                      |
+| ----------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `nome`                              | `string` | Nome da sede (exibido no seletor de sedes do placar)                                           |
+| `instituicao`                       | `string` | Nome global padrão da sede (usado se o participante não tiver uma instituição própria)         |
+| `divisoes`                          | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha           |
+| `participantes`                     | `object` | Mapeamento de `handle do Codeforces` → dados da participante                                   |
+| `participantes[handle].nome`        | `string` | Nome real do competidor                                                                        |
+| `participantes[handle].divisao`     | `string` | (Opcional) Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                 |
+| `participantes[handle].laboratorio` | `string` | (Opcional) Sala/Laboratório onde o competidor está (útil para o painel de entrega de balões)   |
+| `participantes[handle].instituicao` | `string` | (Opcional) Instituição de ensino específica que o competidor representa (sobrescreve a global) |
 
 **Como o sistema de medalhas funciona:**
 

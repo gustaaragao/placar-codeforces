@@ -1,9 +1,8 @@
 import config from '../config.json'
 
 // Resolve as informações de um participante pelo handle
-const getParticipantInfo = (handle) => {
-  const partCfg = config.sedeLocal.participantes
-  if (!partCfg) return null
+const getParticipantInfo = (handle, sedeConfig) => {
+  const partCfg = sedeConfig.participantes || {}
   const entry = partCfg[handle]
   if (!entry) return null
   // Suporte ao formato novo { nome, divisao } e ao formato antigo (string)
@@ -11,7 +10,7 @@ const getParticipantInfo = (handle) => {
   return { nome: entry, divisao: null }
 }
 
-export function parseCodeforcesData(cfData) {
+export function parseCodeforcesData(cfData, sedeConfig = {}) {
   if (!cfData || !cfData.result || !cfData.result.problems || !cfData.result.rows) {
     return { problems: [], teams: [] }
   }
@@ -49,7 +48,7 @@ export function parseCodeforcesData(cfData) {
     // Verificar se algum membro está na lista de participantes locais
     const localMembers = row.party.members.map((m) => ({
       handle: m.handle,
-      info: getParticipantInfo(m.handle),
+      info: getParticipantInfo(m.handle, sedeConfig),
     }))
     const isLocal = localMembers.some((m) => m.info !== null)
 
@@ -59,7 +58,7 @@ export function parseCodeforcesData(cfData) {
 
     // Mapear os nomes customizados dos membros
     const memberDisplayNames = row.party.members.map((m) => {
-      const info = getParticipantInfo(m.handle)
+      const info = getParticipantInfo(m.handle, sedeConfig)
       return info ? `${info.nome} (${m.handle})` : m.handle
     })
 
@@ -72,7 +71,7 @@ export function parseCodeforcesData(cfData) {
       : baseMembersStr
 
     const institution = isLocal
-      ? localMember?.info?.instituicao || config.sedeLocal.instituicao
+      ? localMember?.info?.instituicao || sedeConfig.instituicao || ''
       : ''
 
     const scores = {}
