@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🎈 Placar Codeforces</h1>
-  <p>Sistema de placar em tempo real para a <strong>Maratona Feminina de Programação</strong></p>
+  <p>Sistema de placar em tempo real para contest's do Codeforces inspirado no placar do [Boca](https://github.com/cassiopc/boca)</p>
 </div>
 
 ---
@@ -13,8 +13,9 @@ Placar customizado e em tempo real que consome a API do **Codeforces** de forma 
 - ⭐ **First Accepted**: destaque para quem resolve cada problema primeiro
 - 🏅 **Sistema de medalhas**: por divisão (Geral, Universidade X, Ensino Médio)
 - 🏠 **Filtro de Sede Local**: alterne entre o placar geral e os times da sua sede
-- 🌙 **Dark Mode**
+- 🌍 **Internacionalização (i18n):** suporte nativo para Português, Inglês e Espanhol
 - 🔄 **Atualização automática** a cada 60 segundos
+- 🌙 **Dark Mode**
 
 ---
 
@@ -42,12 +43,12 @@ cp .env.example .env
 Edite o `.env` com os dados do seu contest:
 
 ```dotenv
-# Credenciais do Codeforces — https://codeforces.com/settings/api
+# Credenciais do Codeforces. Disponível em: https://codeforces.com/settings/api
 API_KEY=sua_api_key
 API_SECRET=seu_api_secret
 
-# Dados do contest
-# URL do format: https://codeforces.com/group/{GROUP_CODE}/contest/{CONTEST_ID}
+# Dados do Group e Contest do Codeforces
+# A url tem o seguinte formato: https://codeforces.com/group/{GROUP_CODE}/contest/{CONTEST_ID}
 GROUP_CODE=codigo_do_grupo
 CONTEST_ID=id_do_contest
 ```
@@ -93,14 +94,14 @@ Configura os times e participantes da sua sede para o placar filtrado e o sistem
     "EM": { "label": "Ensino Médio" }
   },
   "participantes": {
-    "handle-codeforces": { 
-      "nome": "Nome Completo", 
+    "handle-codeforces": {
+      "nome": "Nome Completo",
       "divisao": "UFS",
       "laboratorio": "D1",
       "instituicao": "Universidade Federal de Sergipe"
     },
-    "outro-handle": { 
-      "nome": "Outro Nome", 
+    "outro-handle": {
+      "nome": "Outro Nome",
       "divisao": "EM",
       "laboratorio": "D2",
       "instituicao": "Colégio de Aplicação (CODAP)"
@@ -109,15 +110,15 @@ Configura os times e participantes da sua sede para o placar filtrado e o sistem
 }
 ```
 
-| Campo                           | Tipo     | Descrição                                                                            |
-| ------------------------------- | -------- | ------------------------------------------------------------------------------------ |
-| `instituicao`                   | `string` | Nome global padrão da sede (usado se o participante não tiver uma instituição própria) |
-| `divisoes`                      | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha |
-| `participantes`                 | `object` | Mapeamento de `handle do Codeforces` → dados da participante                         |
-| `participantes[handle].nome`    | `string` | Nome real da competidora                                                             |
-| `participantes[handle].divisao` | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                  |
-| `participantes[handle].laboratorio` | `string` | Sala/Laboratório onde o competidor está (útil para o painel de entrega de balões) |
-| `participantes[handle].instituicao` | `string` | Instituição de ensino específica que o competidor representa (sobrescreve a global) |
+| Campo                               | Tipo     | Descrição                                                                              |
+| ----------------------------------- | -------- | -------------------------------------------------------------------------------------- |
+| `instituicao`                       | `string` | Nome global padrão da sede (usado se o participante não tiver uma instituição própria) |
+| `divisoes`                          | `object` | Categorias do evento. A chave é o ID interno e `label` é o rótulo exibido na medalha   |
+| `participantes`                     | `object` | Mapeamento de `handle do Codeforces` → dados da participante                           |
+| `participantes[handle].nome`        | `string` | Nome real da competidor                                                                |
+| `participantes[handle].divisao`     | `string` | Deve corresponder a uma chave em `divisoes` (ex: `"UFS"` ou `"EM"`)                    |
+| `participantes[handle].laboratorio` | `string` | Sala/Laboratório onde o competidor está (útil para o painel de entrega de balões)      |
+| `participantes[handle].instituicao` | `string` | Instituição de ensino específica que o competidor representa (sobrescreve a global)    |
 
 **Como o sistema de medalhas funciona:**
 
@@ -126,7 +127,7 @@ O sistema calcula automaticamente 3 categorias de ranking a partir dos times det
 - 🏅 **Geral** — top 3 entre _todos_ os times locais
 - 🏅 **por Divisão** — top 3 dentro de cada divisão configurada (ex: UFS, EM)
 
-Uma mesma competidora pode receber medalhas em múltiplas categorias (ex: 🥇 Geral + 🥇 UFS). As medalhas aparecem apenas ao ativar o filtro **"Sede"** no placar.
+Um mesmo competidor pode receber medalhas em múltiplas categorias (ex: 🥇 Geral + 🥇 UFS). As medalhas aparecem apenas ao ativar o filtro **"Sede"** no placar.
 
 ---
 
@@ -207,4 +208,5 @@ src/
 
 ## 🤝 Desenvolvido por
 
-**Greedy UFS** — [Instagram](https://instagram.com/greedy-ufs) · [GitHub](https://github.com/gustaaragao/placar-codeforces)
+**LAWD UFS** — [Instagram](https://instagram.com/lawd.ufs)
+**Greedy UFS** — [Instagram](https://instagram.com/greedy-ufs)
