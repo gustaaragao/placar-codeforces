@@ -17,6 +17,8 @@ Placar customizado e em tempo real que consome a API do **Codeforces** de forma 
 - 🔄 **Atualização automática** a cada 60 segundos
 - 🌙 **Dark Mode**
 
+> **⚠️ Aviso Importante:** Esta aplicação oferece suporte **exclusivo** a contests que pertencem a um grupo no Codeforces no qual você possui privilégios de **Manager**. Quaisquer outros cenários ou tipos de contests não são suportados pelo sistema.
+
 ---
 
 ## 🛠️ Pré-requisitos
