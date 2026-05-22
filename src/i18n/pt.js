@@ -1,8 +1,4 @@
 export default {
-  nav: {
-    scoreboard: 'Placar',
-    admin: 'Admin',
-  },
   table: {
     lastUpdate: 'Última atualização',
     loading: 'Carregando...',
@@ -26,6 +22,8 @@ export default {
     search: 'Buscar competidora, time ou problema...',
     lastCheck: 'Última verificação',
     loadingSubmissions: 'Carregando submissões do contest...',
+    showAll: 'Mostrar todos',
+    only: 'Apenas',
     noPendingTitle: 'Nenhum balão pendente!',
     noPendingSearch: 'Nenhum resultado encontrado para a busca atual.',
     noPendingAll: 'Todos os balões das submissões aceitas já foram marcados como entregues.',

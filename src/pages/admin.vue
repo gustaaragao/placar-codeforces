@@ -99,7 +99,7 @@
               : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 dark:bg-[#181818] dark:text-zinc-400 dark:border-zinc-800 dark:hover:bg-[#202020]'
           "
         >
-          {{ lab === 'Todos' ? 'Mostrar Todos' : `Apenas ${lab}` }}
+          {{ lab === 'Todos' ? t('admin.showAll') : `${t('admin.only')} ${lab}` }}
         </button>
       </div>
 

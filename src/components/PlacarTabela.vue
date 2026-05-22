@@ -21,31 +21,6 @@
           </span>
           <span v-else class="italic">{{ t('table.loading') }}</span>
         </div>
-        <!-- Ações -->
-        <div class="flex items-center gap-x-2">
-          <!-- Botão Reload Manual -->
-          <button
-            @click="handleReload"
-            :disabled="isLoading"
-            class="cursor-pointer text-xs px-3 py-1 rounded-lg bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700 text-gray-600 dark:text-zinc-300 border border-gray-200 dark:border-zinc-700 transition-all font-medium flex items-center gap-x-1.5 shadow-xs hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
-            title="Recarregar dados agora"
-          >
-            <svg
-              class="size-3.5 shrink-0"
-              :class="{ 'animate-spin': isLoading }"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
-              <path d="M21 3v5h-5" />
-            </svg>
-            <span>{{ isLoading ? t('table.updating') : t('table.reload') }}</span>
-          </button>
-        </div>
       </div>
       <!-- Container com scroll horizontal para telas pequenas -->
       <div class="overflow-x-auto w-full">

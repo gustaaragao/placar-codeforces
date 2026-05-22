@@ -1,8 +1,4 @@
 export default {
-  nav: {
-    scoreboard: 'Scoreboard',
-    admin: 'Admin',
-  },
   table: {
     lastUpdate: 'Last update',
     loading: 'Loading...',
@@ -26,6 +22,8 @@ export default {
     search: 'Search competitor, team or problem...',
     lastCheck: 'Last check',
     loadingSubmissions: 'Loading contest submissions...',
+    showAll: 'Show all',
+    only: 'Only',
     noPendingTitle: 'No pending balloons!',
     noPendingSearch: 'No results found for the current search.',
     noPendingAll: 'All balloons for accepted submissions have already been marked as delivered.',

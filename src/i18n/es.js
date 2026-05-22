@@ -1,8 +1,4 @@
 export default {
-  nav: {
-    scoreboard: 'Marcador',
-    admin: 'Admin',
-  },
   table: {
     lastUpdate: 'Última actualización',
     loading: 'Cargando...',
@@ -26,6 +22,8 @@ export default {
     search: 'Buscar competidora, equipo o problema...',
     lastCheck: 'Última verificación',
     loadingSubmissions: 'Cargando envíos del concurso...',
+    showAll: 'Mostrar todo',
+    only: 'Solo',
     noPendingTitle: '¡Sin globos pendientes!',
     noPendingSearch: 'No se encontraron resultados para la búsqueda actual.',
     noPendingAll: 'Todos los globos de los envíos aceptados ya han sido marcados como entregados.',
