@@ -131,11 +131,43 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
       isLocal,
       divisao,
       laboratorio: localMember?.info?.laboratorio || null,
+      complemento: localMember?.info?.complemento || null,
       scores,
       totalSolved: row.points,
       totalPenalty: row.penalty,
     }
   })
+
+  // 4. Adicionar participantes locais que não possuem submissões
+  const handlesWithSubmissions = new Set()
+  teams.forEach((t) => {
+    t.members.forEach((m) => handlesWithSubmissions.add(m.handle))
+  })
+
+  if (sedeConfig.participantes) {
+    Object.keys(sedeConfig.participantes).forEach((handle) => {
+      if (!handlesWithSubmissions.has(handle)) {
+        const info = getParticipantInfo(handle, sedeConfig)
+        if (info) {
+          teams.push({
+            id: handle,
+            rank: null,
+            name: `${info.nome} (${handle})`,
+            teamName: '',
+            members: [{ handle, name: info.nome }],
+            institution: info.instituicao || sedeConfig.instituicao || '',
+            isLocal: true,
+            divisao: info.divisao || null,
+            laboratorio: info.laboratorio || null,
+            complemento: info.complemento || null,
+            scores: {},
+            totalSolved: 0,
+            totalPenalty: 0,
+          })
+        }
+      }
+    })
+  }
 
   return { problems, teams }
 }
