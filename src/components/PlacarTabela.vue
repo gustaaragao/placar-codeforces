@@ -68,9 +68,22 @@
               <td class="py-4 px-6">
                 <div class="flex items-center gap-4">
                   <div class="flex flex-col gap-y-1">
-                    <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">{{
-                      team.name
-                    }}</span>
+                    <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">
+                      <template v-if="team.teamName">
+                        {{ team.teamName }}
+                        <template v-if="team.isLocal && team.members && team.members.some(m => m.name)">
+                          <span class="font-normal text-gray-500 dark:text-zinc-400"> - </span>
+                          <span v-for="(member, idx) in team.members" :key="member.handle" class="font-normal">
+                            <template v-if="member.name">{{ member.name }} (</template><a :href="`https://codeforces.com/profile/${member.handle}`" target="_blank" rel="noopener noreferrer" class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors">{{ member.handle }}</a><template v-if="member.name">)</template><template v-if="idx < team.members.length - 1">, </template>
+                          </span>
+                        </template>
+                      </template>
+                      <template v-else>
+                        <span v-for="(member, idx) in team.members" :key="member.handle">
+                          <template v-if="member.name">{{ member.name }} (</template><a :href="`https://codeforces.com/profile/${member.handle}`" target="_blank" rel="noopener noreferrer" class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors">{{ member.handle }}</a><template v-if="member.name">)</template><template v-if="idx < team.members.length - 1">, </template>
+                        </span>
+                      </template>
+                    </span>
                     <span
                       class="text-xs text-gray-500 dark:text-zinc-400"
                       v-if="team.institution"

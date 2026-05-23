@@ -4,59 +4,39 @@
     "icone": "/logo-mfp.png",
     "corBase": "text-m-primary-600 dark:text-m-primary-500"
   },
-  "intervaloRequisicao": 60000,
+  "intervaloRequisicao": 30000,
   "baloes": {
     "A": {
-      "cor": "#34d399",
-      "nome": "verde"
-    },
-    "B": {
       "cor": "#f472b6",
       "nome": "rosa"
     },
-    "C": {
+    "B": {
       "cor": "#c084fc",
       "nome": "roxo"
     },
-    "D": {
-      "cor": "#4ade80",
-      "nome": "verde-claro"
+    "C": {
+      "cor": "#ffffff",
+      "nome": "branco"
     },
-    "E": {
+    "D": {
       "cor": "#fbbf24",
       "nome": "amarelo"
     },
+    "E": {
+      "cor": "#4ade80",
+      "nome": "verde-claro"
+    },
     "F": {
-      "cor": "#60a5fa",
-      "nome": "azul"
-    },
-    "G": {
-      "cor": "#f87171",
-      "nome": "vermelho"
-    },
-    "H": {
-      "cor": "#818cf8",
+      "cor": "#1192e6",
       "nome": "azul-claro"
     },
-    "I": {
-      "cor": "#34d399",
-      "nome": "verde"
+    "G": {
+      "cor": "#c8a2c8",
+      "nome": "lilás"
     },
-    "J": {
-      "cor": "#a78bfa",
-      "nome": "roxo"
-    },
-    "K": {
-      "cor": "#fcd34d",
-      "nome": "amarelo"
-    },
-    "L": {
-      "cor": "#fca5a5",
-      "nome": "vermelho-claro"
-    },
-    "M": {
-      "cor": "#9ca3af",
-      "nome": "cinza"
+    "H": {
+      "cor": "#d72f2b",
+      "nome": "vermelho"
     }
   },
   "sedesLocais": [

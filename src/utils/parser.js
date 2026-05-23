@@ -11,9 +11,11 @@ const getParticipantInfo = (handle, sedeConfig) => {
 }
 
 export function parseCodeforcesData(cfData, sedeConfig = {}) {
-  if (!cfData || !cfData.result || !cfData.result.problems || !cfData.result.rows) {
+  if (!cfData || !cfData.result || !cfData.result.problems) {
     return { problems: [], teams: [] }
   }
+
+  const resultRows = cfData.result.rows || []
 
   // 1. Extrair os problemas usando a configuração de balões
   const problems = cfData.result.problems.map((p) => {
@@ -33,10 +35,10 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
   const firstBloodByProblem = {}
   problems.forEach((p, idx) => {
     let minTime = Infinity
-    cfData.result.rows.forEach((row) => {
+    resultRows.forEach((row) => {
       const res = row.problemResults[idx]
       // Respostas com pontos > 0 significam accepted
-      if (res.points > 0 && res.bestSubmissionTimeSeconds < minTime) {
+      if (res && res.points > 0 && res.bestSubmissionTimeSeconds < minTime) {
         minTime = res.bestSubmissionTimeSeconds
       }
     })
@@ -44,7 +46,7 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
   })
 
   // 3. Montar a lista de times (rows)
-  const teams = cfData.result.rows.map((row) => {
+  const teams = resultRows.map((row) => {
     // Verificar se algum membro está na lista de participantes locais
     const localMembers = row.party.members.map((m) => ({
       handle: m.handle,
@@ -60,6 +62,14 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
     const memberDisplayNames = row.party.members.map((m) => {
       const info = getParticipantInfo(m.handle, sedeConfig)
       return info ? `${info.nome} (${m.handle})` : m.handle
+    })
+
+    const members = row.party.members.map((m) => {
+      const info = getParticipantInfo(m.handle, sedeConfig)
+      return {
+        handle: m.handle,
+        name: info ? info.nome : null,
+      }
     })
 
     // Obter o nome do time incorporando o nome real da participante
@@ -99,6 +109,8 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
       id: row.party.participantId || name,
       rank: row.rank,
       name,
+      teamName: row.party.teamName,
+      members,
       institution,
       isLocal,
       divisao,
