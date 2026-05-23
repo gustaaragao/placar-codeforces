@@ -31,18 +31,33 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
     }
   })
 
-  // 2. Encontrar o 'first to solve' (menor tempo) para cada problema
+  // 2. Encontrar o 'first to solve' (menor tempo) para cada problema (Global e Local)
   const firstBloodByProblem = {}
+  const firstBloodLocalByProblem = {}
+
   problems.forEach((p, idx) => {
-    let minTime = Infinity
+    let minTimeGlobal = Infinity
+    let minTimeLocal = Infinity
+
     resultRows.forEach((row) => {
       const res = row.problemResults[idx]
-      // Respostas com pontos > 0 significam accepted
-      if (res && res.points > 0 && res.bestSubmissionTimeSeconds < minTime) {
-        minTime = res.bestSubmissionTimeSeconds
+      if (res && res.points > 0) {
+        // Global
+        if (res.bestSubmissionTimeSeconds < minTimeGlobal) {
+          minTimeGlobal = res.bestSubmissionTimeSeconds
+        }
+
+        // Local
+        const isLocal = row.party.members.some(
+          (m) => getParticipantInfo(m.handle, sedeConfig) !== null,
+        )
+        if (isLocal && res.bestSubmissionTimeSeconds < minTimeLocal) {
+          minTimeLocal = res.bestSubmissionTimeSeconds
+        }
       }
     })
-    firstBloodByProblem[idx] = minTime
+    firstBloodByProblem[idx] = minTimeGlobal
+    firstBloodLocalByProblem[idx] = minTimeLocal
   })
 
   // 3. Montar a lista de times (rows)
@@ -95,6 +110,7 @@ export function parseCodeforcesData(cfData, sedeConfig = {}) {
           tries: res.rejectedAttemptCount + 1,
           time: Math.floor(res.bestSubmissionTimeSeconds / 60), // em minutos
           first: res.bestSubmissionTimeSeconds === firstBloodByProblem[idx],
+          firstLocal: res.bestSubmissionTimeSeconds === firstBloodLocalByProblem[idx],
         }
       } else if (res.rejectedAttemptCount > 0) {
         // Tentado, mas não resolvido

@@ -108,9 +108,14 @@
                     </span>
                     <span
                       class="text-xs text-gray-500 dark:text-zinc-400"
-                      v-if="team.institution"
-                      >{{ team.institution }}</span
+                      v-if="team.institution || team.laboratorio"
                     >
+                      <span v-if="team.institution">{{ team.institution }}</span>
+                      <span v-if="team.institution && team.laboratorio" class="mx-1">•</span>
+                      <span v-if="team.laboratorio" class="font-medium text-m-primary-600 dark:text-m-primary-400"
+                        >[{{ team.laboratorio }}]</span
+                      >
+                    </span>
                     <!-- Medalhas por categoria (visíveis no filtro de Sede) -->
                     <div
                       v-if="filtro === 'sede' && medalsByTeam[team.id]?.length"
@@ -139,7 +144,7 @@
                     :cor="problem.color"
                     :tentativas="team.scores[problem.id].tries"
                     :tempo="team.scores[problem.id].time"
-                    :isFirst="team.scores[problem.id].first"
+                    :isFirst="filtro === 'sede' ? team.scores[problem.id].firstLocal : team.scores[problem.id].first"
                     :animar="animatedBalloons.has(`${team.id}-${problem.id}`)"
                   />
                 </div>
