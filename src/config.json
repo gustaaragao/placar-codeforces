@@ -44,15 +44,127 @@
       "nome": "UFS - São Cristóvão",
       "instituicao": "UFS",
       "laboratorios": [
-        { "nome": "D1", "capacidade": 30 },
-        { "nome": "D2", "capacidade": 30 },
-        { "nome": "D3", "capacidade": 30 }
+        {
+          "nome": "D1",
+          "capacidade": 20
+        },
+        {
+          "nome": "D2",
+          "capacidade": 20
+        }
       ],
       "divisoes": {
-        "UFS": { "label": "UFS" },
-        "EM": { "label": "Ensino Médio" }
+        "UFS": {
+          "label": "UFS"
+        },
+        "EM": {
+          "label": "Ensino Médio"
+        }
       },
-      "participantes": {}
+      "participantes": {
+        "maryaraujo2": {
+          "nome": "Mariane Araújo Santos ",
+          "divisao": "EM",
+          "laboratorio": "D1",
+          "instituicao": "Colégio Estadual Armindo Guaraná"
+        },
+        "maduu": {
+          "nome": "Maria Eduarda Santos Miranda ",
+          "divisao": "Geral",
+          "laboratorio": "D1",
+          "instituicao": "Estácio - Aracaju"
+        },
+        "Lugomesc": {
+          "nome": "Luany Correia Gomes",
+          "divisao": "Geral",
+          "laboratorio": "D1",
+          "instituicao": "UNIT - Aracaju"
+        },
+        "annajusantos": {
+          "nome": "Anna Julia Matos Lins Santos ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "MayzeAnjos": {
+          "nome": "Mayze dos Anjos Nunes",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "thyfanny": {
+          "nome": "Thyfanny da Cruz Silva",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "aniinha.bizo": {
+          "nome": "Ana Vitoria de Almeida Bizo",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "Mirelasouz6": {
+          "nome": "Mirela Souza de Jesus ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "NandaK": {
+          "nome": "Fernanda Karoliny Santos Silva ",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "anajfontess": {
+          "nome": "Ana Julia Barbosa Fontes de Souza ",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "nayaraaaaa": {
+          "nome": "Nayara Oliveira Santos ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "laumiau": {
+          "nome": "Lauane de Morais Araujo",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "isaBPM": {
+          "nome": "Isabele de Almeida Nunes ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "Luaccioly": {
+          "nome": "Luiza Pereira Accioly ",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "rarais": {
+          "nome": "Raissa Cavalcante de Albuquerque Bitencurte ",
+          "divisao": "UFS",
+          "laboratorio": "D1",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "biaeduao": {
+          "nome": "Beatriz Oliveira Eduão ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        },
+        "MicaelyCacho": {
+          "nome": "Micaely Cacho Oliveira ",
+          "divisao": "UFS",
+          "laboratorio": "D2",
+          "instituicao": "UFS - São Cristóvão"
+        }
+      }
     }
   ]
 }
