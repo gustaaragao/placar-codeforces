@@ -347,8 +347,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Balloon, Star, RefreshCw, Trash2, Search, Check, RotateCcw } from '@lucide/vue'
+import config from '@/config.json'
 import { useLocale } from '@/composables/useLocale'
 import { useSede } from '@/composables/useSede'
 import { fetchCodeforcesData } from '@/utils/api'
@@ -525,8 +526,19 @@ watch(activeSede, () => {
 })
 
 // Inicialização
+let intervalId = null
+
 onMounted(() => {
   loadDeliveredFromStorage()
   loadData()
+
+  const interval = config.intervaloRequisicao || 60000
+  intervalId = setInterval(() => {
+    loadData()
+  }, interval)
+})
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
 })
 </script>

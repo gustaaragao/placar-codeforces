@@ -71,16 +71,38 @@
                     <span class="font-bold text-gray-900 dark:text-zinc-100 tracking-wide">
                       <template v-if="team.teamName">
                         {{ team.teamName }}
-                        <template v-if="team.isLocal && team.members && team.members.some(m => m.name)">
+                        <template
+                          v-if="team.isLocal && team.members && team.members.some((m) => m.name)"
+                        >
                           <span class="font-normal text-gray-500 dark:text-zinc-400"> - </span>
-                          <span v-for="(member, idx) in team.members" :key="member.handle" class="font-normal">
-                            <template v-if="member.name">{{ member.name }} (</template><a :href="`https://codeforces.com/profile/${member.handle}`" target="_blank" rel="noopener noreferrer" class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors">{{ member.handle }}</a><template v-if="member.name">)</template><template v-if="idx < team.members.length - 1">, </template>
+                          <span
+                            v-for="(member, idx) in team.members"
+                            :key="member.handle"
+                            class="font-normal"
+                          >
+                            <template v-if="member.name">{{ member.name }} (</template
+                            ><a
+                              :href="`https://codeforces.com/profile/${member.handle}`"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors"
+                              >{{ member.handle }}</a
+                            ><template v-if="member.name">)</template
+                            ><template v-if="idx < team.members.length - 1">, </template>
                           </span>
                         </template>
                       </template>
                       <template v-else>
                         <span v-for="(member, idx) in team.members" :key="member.handle">
-                          <template v-if="member.name">{{ member.name }} (</template><a :href="`https://codeforces.com/profile/${member.handle}`" target="_blank" rel="noopener noreferrer" class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors">{{ member.handle }}</a><template v-if="member.name">)</template><template v-if="idx < team.members.length - 1">, </template>
+                          <template v-if="member.name">{{ member.name }} (</template
+                          ><a
+                            :href="`https://codeforces.com/profile/${member.handle}`"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:underline text-m-primary-600 dark:text-m-primary-400 hover:text-m-primary-700 dark:hover:text-m-primary-300 transition-colors"
+                            >{{ member.handle }}</a
+                          ><template v-if="member.name">)</template
+                          ><template v-if="idx < team.members.length - 1">, </template>
                         </span>
                       </template>
                     </span>
@@ -150,6 +172,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import config from '@/config.json'
 import BalaoIcone from '@/components/BalaoIcone.vue'
 import { parseCodeforcesData } from '@/utils/parser'
 import { fetchCodeforcesData } from '@/utils/api'
@@ -322,20 +345,16 @@ const loadData = async (isFirstLoad = false) => {
   }
 }
 
-// Reload manual: executa o loadData sem ser o primeiro carregamento
-const handleReload = async () => {
-  if (isLoading.value) return
-  await loadData(false)
-}
-
 watch(activeSede, () => {
   loadData(true)
 })
 
 onMounted(async () => {
   await loadData(true)
-  // interval configs can be improved later
-  intervalId = setInterval(() => loadData(false), 60000)
+
+  const interval = config.intervaloRequisicao
+
+  intervalId = setInterval(() => loadData(false), interval)
 })
 
 onUnmounted(() => {

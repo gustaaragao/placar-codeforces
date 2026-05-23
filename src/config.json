@@ -45,90 +45,14 @@
       "instituicao": "UFS",
       "laboratorios": [
         { "nome": "D1", "capacidade": 30 },
-        { "nome": "D2", "capacidade": 30 }
+        { "nome": "D2", "capacidade": 30 },
+        { "nome": "D3", "capacidade": 30 }
       ],
       "divisoes": {
         "UFS": { "label": "UFS" },
-        "Geral": { "label": "Geral" }
+        "EM": { "label": "Ensino Médio" }
       },
-      "participantes": {
-        "jeroenodb": {
-          "nome": "Gustavo Henrique Aragão Silva",
-          "divisao": "UFS",
-          "laboratorio": "D1",
-          "instituicao": "UFS - São Cristóvão"
-        },
-        "feranjos": {
-          "nome": "Mariana Aragão Soares",
-          "divisao": "Geral",
-          "laboratorio": "D1",
-          "instituicao": "UFS - São Cristóvão"
-        },
-        "helington": {
-          "nome": "Maria Clara Aragão Soares",
-          "divisao": "UFS",
-          "laboratorio": "D2",
-          "instituicao": "UFS - São Cristóvão"
-        }
-      }
-    },
-    {
-      "nome": "IFS - Lagarto",
-      "instituicao": "IFS",
-      "laboratorios": [{ "nome": "Lab 1", "capacidade": 20 }],
-      "divisoes": {
-        "EM": { "label": "Ensino Médio" },
-        "Geral": { "label": "Geral" }
-      },
-      "participantes": {
-        "Mulato": {
-          "nome": "Carlos Mulato",
-          "divisao": "EM",
-          "laboratorio": "Lab 1",
-          "instituicao": "IFS - Lagarto"
-        },
-        "Paulo21": {
-          "nome": "Paulo Roberto",
-          "divisao": "EM",
-          "laboratorio": "Lab 1",
-          "instituicao": "IFS - Lagarto"
-        },
-        "dggb": {
-          "nome": "Diego Garcia",
-          "divisao": "Geral",
-          "laboratorio": "Lab 1",
-          "instituicao": "IFS - Lagarto"
-        }
-      }
-    },
-    {
-      "nome": "UNIT - Aracaju",
-      "instituicao": "UNIT",
-      "laboratorios": [{ "nome": "Lab Maker", "capacidade": 40 }],
-      "divisoes": {
-        "UFS": { "label": "Universidade" },
-        "Geral": { "label": "Geral" }
-      },
-      "participantes": {
-        "jhmrl": {
-          "nome": "João Henrique",
-          "divisao": "UFS",
-          "laboratorio": "Lab Maker",
-          "instituicao": "UNIT - Aracaju"
-        },
-        "Marcos_gma": {
-          "nome": "Marcos Gabriel",
-          "divisao": "UFS",
-          "laboratorio": "Lab Maker",
-          "instituicao": "UNIT - Aracaju"
-        },
-        "joao09": {
-          "nome": "João Pedro Silva",
-          "divisao": "Geral",
-          "laboratorio": "Lab Maker",
-          "instituicao": "UNIT - Aracaju"
-        }
-      }
+      "participantes": {}
     }
   ]
 }

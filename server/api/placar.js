@@ -1,5 +1,11 @@
-/* global defineEventHandler, process, createError */
-export default defineEventHandler(async (_event) => {
+/* global defineEventHandler, process, createError, setResponseHeaders */
+export default defineEventHandler(async (event) => {
+  setResponseHeaders(event, {
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  })
+
   const API_KEY = process.env.API_KEY || ''
   const API_SECRET = process.env.API_SECRET || ''
   const CONTEST_ID = process.env.CONTEST_ID || ''

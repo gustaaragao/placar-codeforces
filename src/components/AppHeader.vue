@@ -31,10 +31,7 @@
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LangSelector from '@/components/LangSelector.vue'
 import SedeSelector from '@/components/SedeSelector.vue'
-import { useLocale } from '@/composables/useLocale'
 import config from '@/config.json'
-
-const { t } = useLocale()
 
 const evento = config.evento || {
   nome: 'Maratona de Programação',
